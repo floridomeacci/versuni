@@ -1221,27 +1221,56 @@ async function callOpenAI(prompt, model = 'gpt-4o', jsonMode = false) {
     content: prompt
   });
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: model,
-      messages,
-      response_format: jsonMode ? { type: 'json_object' } : undefined,
-      temperature: 0.7
-    })
-  });
+  const requestPayload = {
+    model,
+    messages,
+    temperature: 0.7
+  };
 
-  if (!response.ok) {
-    throw new Error(`OpenAI API error: ${response.statusText}`);
+  if (jsonMode) {
+    requestPayload.response_format = { type: 'json_object' };
   }
 
-  const data = await response.json();
-  const content = data.choices[0].message.content;
+  let data;
+
+  if (OPENAI_API_KEY) {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify(requestPayload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.statusText}`);
+    }
+
+    data = await response.json();
+  } else {
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestPayload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`OpenAI proxy error (${response.status}): ${errorText}`);
+    }
+
+    data = await response.json();
+  }
+
+  const content = data.choices?.[0]?.message?.content || '';
   
+  if (!content) {
+    throw new Error('OpenAI response missing content');
+  }
+
   return jsonMode ? JSON.parse(content) : content;
 }
 
