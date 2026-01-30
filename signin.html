@@ -35,13 +35,13 @@
 
         <form class="auth-form" id="signinForm">
           <div class="form-group">
-            <label class="form-label">Email Address</label>
+            <label class="form-label">Username</label>
             <div class="input-wrapper">
               <svg class="icon-left" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67">
-                <rect x="2" y="4" width="16" height="12" rx="2"/>
-                <path d="M2 6l8 5 8-5"/>
+                <circle cx="10" cy="7" r="4"/>
+                <path d="M3 18a7 7 0 0114 0"/>
               </svg>
-              <input type="email" id="signinEmail" placeholder="john@example.com" required>
+              <input type="text" id="signinUsername" placeholder="Enter username" required autocomplete="username">
             </div>
           </div>
 
@@ -71,9 +71,7 @@
           <button type="submit" class="btn-auth">Sign In</button>
         </form>
 
-        <p class="auth-link">
-          Don't have an account? <a href="index.html">Sign up</a>
-        </p>
+
       </div>
     </div>
   </main>
@@ -148,6 +146,7 @@
     </div>
   </footer>
 
+  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
