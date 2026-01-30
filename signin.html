@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Philips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="culture-map.html">Culture Map</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="asset-generator.html">Asset Generator</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">Sign in to your account</p>
+        </div>
+
+        <form class="auth-form" id="signinForm">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-wrapper">
+              <svg class="icon-left" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67">
+                <rect x="2" y="4" width="16" height="12" rx="2"/>
+                <path d="M2 6l8 5 8-5"/>
+              </svg>
+              <input type="email" id="signinEmail" placeholder="john@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrapper password">
+              <svg class="icon-left" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67">
+                <rect x="3" y="9" width="14" height="9" rx="2"/>
+                <path d="M6 9V6a4 4 0 118 0v3"/>
+              </svg>
+              <input type="password" id="signinPassword" placeholder="••••••••" required>
+              <svg class="icon-right" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" onclick="togglePassword('signinPassword')">
+                <ellipse cx="10" cy="10" rx="8" ry="5"/>
+                <circle cx="10" cy="10" r="2.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="form-extras">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" id="rememberMe">
+              <span class="checkbox-label">Remember me</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-auth">Sign In</button>
+        </form>
+
+        <p class="auth-link">
+          Don't have an account? <a href="index.html">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

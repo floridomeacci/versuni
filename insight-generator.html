@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight Generator - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html" class="active">Insight Generator</a>
+      <a href="culture-map.html">Culture Map</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="ad-generator.html">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="philips-hero" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80'); min-height: 280px;">
+    <div class="philips-hero__content">
+      <h1 class="philips-hero__title">Insight Generator</h1>
+      <p class="philips-hero__subtitle">Discover emerging trends and consumer insights powered by AI to fuel your marketing strategy.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 40px; max-width: 1200px;">
+      
+      <!-- Two Column Intro -->
+      <div class="trend-intro-grid">
+        <!-- Left Info Card -->
+        <div class="trend-info-card">
+          <h1 class="card-title"><span class="text-teal">Insight</span> <span class="text-white">Generator</span></h1>
+          <p class="card-subtitle text-white">Discover emerging home trends and match them with Philips products</p>
+          <h2 class="card-section-title"><span class="text-teal">How</span> it works</h2>
+          <ul class="trend-info-list">
+            <li>We analyze current discussions and trends across the internet</li>
+            <li>Our AI identifies the most relevant emerging trends</li>
+            <li>We match trends with Philips products and suggest marketing angles</li>
+          </ul>
+          
+          <div class="trend-note">
+            <strong>Note:</strong>
+            <p><em>This tool provides real-time trend insights but should be used alongside traditional market research for best results.</em></p>
+          </div>
+        </div>
+        
+        <!-- Right Input Card -->
+        <div class="trend-input-card">
+          <label class="form-label">Let's explore trends in:</label>
+          <textarea class="trend-textarea" placeholder="living room furniture, kitchen storage, home office..."></textarea>
+          <button class="btn-discover" id="discoverBtn">
+            Discover Trends →
+          </button>
+        </div>
+      </div>
+
+      <!-- Previous Trends Section -->
+      <div class="previous-trends-section">
+        <div class="white-card" style="margin-bottom: 24px; padding: 24px 32px;">
+          <h2 class="card-title" style="margin-bottom: 0;"><span class="text-teal">Your previous</span> home trends</h2>
+        </div>
+        
+        <div class="trends-grid">
+          <!-- Trend Card 1 -->
+          <div class="trend-result-card">
+            <div class="trend-result-header">
+              <span class="trend-tag">kitchen design for foodies</span>
+              <span class="trend-date">Feb 4, 2025</span>
+              <button class="trend-delete-btn">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="trend-image">
+              <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Smart Kitchen">
+              <div class="trend-image-actions">
+                <button class="trend-action-btn">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M11 3H17V9M17 3L9 11M8 5H5C3.89543 5 3 5.89543 3 7V15C3 16.1046 3.89543 17 5 17H13C14.1046 17 15 16.1046 15 15V12"/>
+                  </svg>
+                  source
+                </button>
+                <button class="trend-action-btn">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M15 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM15 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 14.5l9-9M5.5 14.5l9 3"/>
+                  </svg>
+                  share
+                </button>
+              </div>
+            </div>
+            <div class="trend-content">
+              <h3 class="trend-title">Smart Kitchens with Integrated Technology</h3>
+              <p class="trend-description">Smart appliances and AI-driven features enhance kitchen efficiency and convenience. This trend reflects the growing integration of technology into everyday life. Philips has begun to incorporate smart technology into their products, such as their smart lighting systems, making it accessible for everyday consumers.</p>
+              
+              <div class="trend-arrow">
+                <svg viewBox="0 0 24 24" fill="#00BABE">
+                  <path d="M12 16l-6-6h12l-6 6z"/>
+                </svg>
+              </div>
+              
+              <h4 class="featured-products-title">Featured Products</h4>
+              
+              <!-- Product Card -->
+              <div class="trend-product-card">
+                <div class="trend-product-image">
+                  <img src="images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp" alt="Philips Airfryer">
+                </div>
+                <div class="trend-product-info">
+                  <h5>Philips Airfryer XXL - Healthy Frying Made Easy!</h5>
+                  <span class="trend-product-price">$299.99</span>
+                  <button class="trend-remove-btn">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                    </svg>
+                    Remove suggestion
+                  </button>
+                </div>
+              </div>
+              
+              <p class="trend-product-explanation"><em>The Philips Airfryer XXL uses Rapid Air technology to deliver crispy, delicious results with up to 90% less fat. Its smart sensing technology automatically adjusts time and temperature for perfect results every time—ideal for tech-savvy home chefs.</em></p>
+              
+              <!-- Product Card 2 -->
+              <div class="trend-product-card">
+                <div class="trend-product-image">
+                  <img src="images/imgi_93_Philips_5400_Latte_Go_1_68dab93d0d_ce5ad74505.png" alt="Philips LatteGo">
+                </div>
+                <div class="trend-product-info">
+                  <h5>Philips LatteGo 5400 - Barista Quality at Home</h5>
+                  <span class="trend-product-price">$899.99</span>
+                  <button class="trend-remove-btn">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                    </svg>
+                    Remove suggestion
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trend Card 2 -->
+          <div class="trend-result-card">
+            <div class="trend-result-header">
+              <span class="trend-tag">kitchen design for foodies</span>
+              <span class="trend-date">Feb 4, 2025</span>
+              <button class="trend-delete-btn">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="trend-image">
+              <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Minimalist Kitchen">
+              <div class="trend-image-actions">
+                <button class="trend-action-btn">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M11 3H17V9M17 3L9 11M8 5H5C3.89543 5 3 5.89543 3 7V15C3 16.1046 3.89543 17 5 17H13C14.1046 17 15 16.1046 15 15V12"/>
+                  </svg>
+                  source
+                </button>
+                <button class="trend-action-btn">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M15 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM15 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 14.5l9-9M5.5 14.5l9 3"/>
+                  </svg>
+                  share
+                </button>
+              </div>
+            </div>
+            <div class="trend-content">
+              <h3 class="trend-title">Minimalist Design</h3>
+              <p class="trend-description">Clean lines and neutral palettes create a clutter-free, modern look. This trend aligns with Philips's democratic design principles, as they offer a wide range of minimalist furniture and accessories that cater to various budgets and preferences.</p>
+              
+              <div class="trend-arrow">
+                <svg viewBox="0 0 24 24" fill="#00BABE">
+                  <path d="M12 16l-6-6h12l-6 6z"/>
+                </svg>
+              </div>
+              
+              <h4 class="featured-products-title">Featured Products</h4>
+              
+              <!-- Product Card -->
+              <div class="trend-product-card">
+                <div class="trend-product-image">
+                  <img src="images/imgi_30_Aircooker_88aaad917c_af05dc9f85_1600_75.webp" alt="Philips Air Steam Cooker">
+                </div>
+                <div class="trend-product-info">
+                  <h5>Philips Air Steam Cooker - Perfect Cooking Every Time</h5>
+                  <span class="trend-product-price">$349.99</span>
+                  <button class="trend-remove-btn">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                    </svg>
+                    Remove suggestion
+                  </button>
+                </div>
+              </div>
+              
+              <p class="trend-product-explanation"><em>The Philips Air Steam Cooker combines time, temperature and humidity for optimal cooking results. Its sleek design fits perfectly in minimalist kitchens while delivering restaurant-quality meals with the push of a button.</em></p>
+              
+              <!-- Product Card 2 -->
+              <div class="trend-product-card">
+                <div class="trend-product-image">
+                  <img src="images/imgi_49_Saeco_Xelsis_a649a1c144_1920_75.webp" alt="Saeco Xelsis">
+                </div>
+                <div class="trend-product-info">
+                  <h5>Saeco Xelsis Suprema - Italian Coffee Excellence</h5>
+                  <span class="trend-product-price">$1,699.99</span>
+                  <button class="trend-remove-btn">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+                    </svg>
+                    Remove suggestion
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Brief - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="culture-map.html">Culture Map</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="ad-generator.html" class="active">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 120px; max-width: 1400px;">
+      
+      <!-- Brief Title Card -->
+      <div class="white-card" style="margin-bottom: 40px; padding: 24px 32px;">
+        <h1 class="card-title" id="briefTitle"><span class="text-teal">Philips Social Ad</span> for Gen Z × sunday morning</h1>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="brief-layout">
+        <!-- Left Column - Revision Request -->
+        <div class="brief-left-column">
+          <div class="revision-section white-card">
+            <h2 class="card-section-title"><span class="text-teal">Request</span> a new revision</h2>
+            <textarea class="revision-textarea" placeholder="Write your comment for a new revision here"></textarea>
+            <button class="btn-revise" id="reviseBtn">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4v6h6M16 16v-6h-6"/>
+                <path d="M15.7 9.7a6 6 0 1 0-1.4 6.6"/>
+              </svg>
+              REVISE
+            </button>
+          </div>
+
+          <div class="revision-history white-card">
+            <h3 class="card-section-title"><span class="text-teal">Revision</span> History</h3>
+            <p class="revision-history-empty">No revision comments yet.</p>
+          </div>
+
+          <a href="ad-generator.html" class="start-new-brief-link">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 10H5M9 6l-4 4 4 4"/>
+            </svg>
+            Start a new brief
+          </a>
+        </div>
+
+        <!-- Right Column - Ad Preview -->
+        <div class="brief-right-column">
+          <div class="version-header">
+            <h2 class="version-title">Version 1</h2>
+            <div class="version-actions">
+              <button class="version-action-btn">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M15 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM15 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 14.5l9-9M5.5 14.5l9 3"/>
+                </svg>
+              </button>
+              <span class="version-status completed">Completed</span>
+              <button class="version-action-btn">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10 5v10M5 12l5 5 5-5"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ad Preview Card -->
+          <div class="ad-preview-container">
+            <div class="ad-preview-card" id="adPreviewCard">
+              <!-- Instagram-style Post Preview -->
+              <div class="instagram-preview">
+                <div class="instagram-header">
+                  <div class="instagram-avatar">
+                    <img src="philips-logo.svg" alt="Philips">
+                  </div>
+                  <span class="instagram-username">Philips</span>
+                  <button class="instagram-more">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="5" cy="12" r="2"/>
+                      <circle cx="12" cy="12" r="2"/>
+                      <circle cx="19" cy="12" r="2"/>
+                    </svg>
+                  </button>
+                </div>
+                
+                <div class="instagram-image">
+                  <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop" alt="Ad Creative" id="adCreativeImg">
+                  <div class="instagram-overlay">
+                    <p class="instagram-overlay-text">When 'I can't cook to save my life'...</p>
+                    <p class="instagram-overlay-subtext">...becomes 'Watch me nail this brunch!'</p>
+                  </div>
+                  <button class="instagram-nav-btn instagram-nav-prev">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                  </button>
+                  <button class="instagram-nav-btn instagram-nav-next">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 6l6 6-6 6"/>
+                    </svg>
+                  </button>
+                  <div class="instagram-dots">
+                    <span class="dot"></span>
+                    <span class="dot active"></span>
+                  </div>
+                </div>
+
+                <div class="instagram-actions">
+                  <div class="instagram-actions-left">
+                    <button class="instagram-action-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    </button>
+                    <button class="instagram-action-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                      </svg>
+                    </button>
+                    <button class="instagram-action-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <button class="instagram-action-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="instagram-likes">264 likes</div>
+                <div class="instagram-caption">
+                  <strong>Philips</strong> Who said weekend brunch goals were just for the pros? With the right tools and a dash of confidence, those picture-perfect pancakes are totally within reach!
+                </div>
+              </div>
+            </div>
+
+            <!-- Loading State (hidden by default) -->
+            <div class="ad-loading-state" id="adLoadingState" style="display: none;">
+              <div class="loading-spinner"></div>
+              <p>Your creative is being generated...</p>
+            </div>
+          </div>
+
+          <!-- Version Selector -->
+          <div class="version-selector">
+            <h3 class="version-selector-title">Versions</h3>
+            <div class="version-list">
+              <button class="version-item active">
+                <span class="version-item-badge">Latest</span>
+                <span class="version-item-number">v1</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const audience = urlParams.get('audience');
+    const moment = urlParams.get('moment');
+    const product = urlParams.get('product');
+
+    // Update title based on parameters
+    if (audience && moment) {
+      const audienceLabels = {
+        'gen-z': 'Gen Z',
+        'millennials': 'Millennials',
+        'families-with-kids': 'Families with kids',
+        'home-chefs': 'Home Chefs',
+        'health-conscious': 'Health Conscious',
+        'busy-professionals': 'Busy Professionals',
+        'coffee-lovers': 'Coffee Lovers'
+      };
+      
+      const momentLabels = {
+        'waking-up': 'waking up',
+        'first-coffee': 'first coffee',
+        'morning-meditation': 'morning meditation',
+        'sunday-morning': 'sunday morning',
+        'getting-kids-ready': 'getting kids ready for school',
+        'working-from-home': 'working from home',
+        'family-dinner': 'family dinner',
+        'weekend-brunch': 'weekend brunch',
+        'meal-prep': 'meal prep',
+        'late-night-snack': 'late night snack'
+      };
+      
+      const audienceLabel = audienceLabels[audience] || audience;
+      const momentLabel = momentLabels[moment] || moment;
+      
+      document.getElementById('briefTitle').textContent = 
+        `Philips Social Ad for ${audienceLabel} × ${momentLabel}`;
+    }
+
+    // Simulate loading for new briefs
+    if (urlParams.get('product')) {
+      const previewCard = document.getElementById('adPreviewCard');
+      const loadingState = document.getElementById('adLoadingState');
+      const statusBadge = document.querySelector('.version-status');
+      
+      // Show loading state
+      previewCard.style.display = 'none';
+      loadingState.style.display = 'flex';
+      statusBadge.textContent = 'Processing';
+      statusBadge.classList.remove('completed');
+      statusBadge.classList.add('processing');
+      
+      // Simulate generation time
+      setTimeout(() => {
+        previewCard.style.display = 'block';
+        loadingState.style.display = 'none';
+        statusBadge.textContent = 'Completed';
+        statusBadge.classList.remove('processing');
+        statusBadge.classList.add('completed');
+      }, 3000);
+    }
+
+    // Revise button
+    document.getElementById('reviseBtn').addEventListener('click', function() {
+      const comment = document.querySelector('.revision-textarea').value;
+      if (!comment.trim()) {
+        alert('Please enter a revision comment.');
+        return;
+      }
+      alert('Revision request submitted. Your new creative is being generated.');
+    });
+  </script>
+</body>
+</html>

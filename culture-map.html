@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Culture Map - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="culture-map.html" class="active">Culture Map</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="ad-generator.html">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="philips-hero" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80'); min-height: 280px;">
+    <div class="philips-hero__content">
+      <h1 class="philips-hero__title">Culture Map</h1>
+      <p class="philips-hero__subtitle">Explore cultural territories and discover meaningful connections between your brand and audience.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 40px; max-width: 1200px;">
+
+      <!-- Combinator Form Card -->
+      <div class="white-card combinator-form">
+        <div class="card-header">
+          <h1 class="card-title"><span class="text-teal">Culture</span> Map</h1>
+          <p class="card-subtitle">Combine your audience and moment to find a feeling and a dream that only Philips can deliver.</p>
+        </div>
+        <div class="combinator-row">
+          <div class="combinator-field">
+            <label class="form-label">Audience</label>
+            <div class="select-wrapper">
+              <select id="audienceSelect">
+                <option value="">Select audience</option>
+                <option value="gamers">Gamers</option>
+                <option value="home-chefs">Home Chefs</option>
+                <option value="gen-z">Gen Z</option>
+                <option value="millennials">Millennials</option>
+                <option value="parents">Parents</option>
+                <option value="professionals">Professionals</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="combinator-field">
+            <label class="form-label">Moment</label>
+            <div class="select-wrapper">
+              <select id="momentSelect">
+                <option value="">Select moment</option>
+                <option value="sunday-morning">Sunday morning</option>
+                <option value="getting-kids-ready">Getting kids ready for school</option>
+                <option value="packing-lunches">Packing lunches</option>
+                <option value="working-from-home">Working from home</option>
+                <option value="taking-a-break">Taking a work break</option>
+                <option value="afternoon-snack">Afternoon snack time</option>
+                <option value="date-night">Date night in</option>
+                <option value="online-shopping">Online shopping</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+          <button type="button" class="btn-combine" id="combineBtn">
+            Combine →
+          </button>
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="insights-grid" id="insightsGrid">
+        <!-- Sample Result Card 1 -->
+        <div class="insight-result-card">
+          <div class="insight-result-header">
+            <span class="insight-result-title">Gamers × afternoon snack time</span>
+            <span class="insight-result-date">Apr 3, 2025</span>
+            <button class="insight-delete-btn">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+              </svg>
+            </button>
+          </div>
+          <div class="insight-result-content">
+            <div class="insight-quote-section">
+              <p class="insight-quote">"I just need a quick, healthy snack that won't slow me down during my gaming session."</p>
+              <button class="insight-details-btn" onclick="openDataModal(0)">Click to view feeling details</button>
+            </div>
+            <div class="insight-image-section">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop" alt="Gamer">
+            </div>
+          </div>
+          <div class="insight-product-section">
+            <div class="insight-product-image">
+              <img src="images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp" alt="Philips Airfryer">
+            </div>
+            <div class="insight-product-info">
+              <h4 class="insight-product-name">Philips Airfryer Compact</h4>
+              <p class="insight-product-desc">The Philips Airfryer Compact lets gamers enjoy crispy, quick snacks in minutes—perfect for maintaining focus without leaving the game for too long.</p>
+              <p class="insight-product-price">USD 149.99 only on Philips.com</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Result Card 2 -->
+        <div class="insight-result-card">
+          <div class="insight-result-header">
+            <span class="insight-result-title">Home Chefs × Sunday morning</span>
+            <span class="insight-result-date">Apr 3, 2025</span>
+            <button class="insight-delete-btn">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 6h12M8 6V4h4v2m-6 0v10h8V6"/>
+              </svg>
+            </button>
+          </div>
+          <div class="insight-result-content">
+            <div class="insight-quote-section">
+              <p class="insight-quote">"Sunday mornings are my time to experiment with new recipes and really enjoy the process of making something special."</p>
+              <button class="insight-details-btn" onclick="openDataModal(1)">Click to view feeling details</button>
+            </div>
+            <div class="insight-image-section">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop" alt="Coffee moment">
+            </div>
+          </div>
+          <div class="insight-product-section">
+            <div class="insight-product-image">
+              <img src="images/imgi_49_Saeco_Xelsis_a649a1c144_1920_75.webp" alt="Saeco Xelsis Suprema">
+            </div>
+            <div class="insight-product-info">
+              <h4 class="insight-product-name">Saeco Xelsis Suprema</h4>
+              <p class="insight-product-desc">The Saeco Xelsis Suprema delivers café-quality espresso at home—perfect for home chefs who want to elevate their Sunday morning ritual with Italian excellence.</p>
+              <p class="insight-product-price">USD 1,699.99 only on Saeco.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Data Sources Modal -->
+  <div class="modal-overlay" id="dataModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Data Sources</h2>
+        <button class="modal-close" onclick="closeDataModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 6l12 12M6 18L18 6"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Related Feels Barometer Question:</h3>
+          <p id="modalQuestion">Playing a game / video game by myself feels like</p>
+        </div>
+        <div class="modal-section">
+          <h3>Country</h3>
+          <p id="modalCountry">USA</p>
+        </div>
+        <div class="modal-section">
+          <h3>Answers Summary</h3>
+          <p id="modalSummary">Playing a video game alone evokes a spectrum of emotions and sensations, with a prevalent sense of relaxation suggested by the expressed feelings. The common association of light, smooth shapes like circles and swirls indicates a comforting and easy-going environment, hinting at the enjoyment and escapism these experiences provide.</p>
+        </div>
+        <div class="modal-section">
+          <h3>AI Analysis</h3>
+          <p id="modalAnalysis">Respondents express a mix of emotions about playing video games alone, with themes of relaxation, fun, and satisfaction prominent. Phrases like "calm," "happy," and "me time" highlight the activity as a means of escape and personal enjoyment.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Additional Research Sources</h3>
+          <p id="modalSources">Consumer behavior studies, market research data, demographic analysis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

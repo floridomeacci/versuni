@@ -1,0 +1,5 @@
+{
+  "name": "The Infinite Loop Agent Dashboard",
+  "description": "A multi-agent system simulation where AI personas (Creator, Critic, Improver) iteratively refine a concept through a cyclic workflow.",
+  "requestFramePermissions": []
+}

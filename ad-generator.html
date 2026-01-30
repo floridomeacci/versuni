@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Generator - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="culture-map.html">Culture Map</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="ad-generator.html" class="active">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="philips-hero" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1920&q=80'); min-height: 280px;">
+    <div class="philips-hero__content">
+      <h1 class="philips-hero__title">Social Ad Maker</h1>
+      <p class="philips-hero__subtitle">Create compelling social media ads tailored to your audience, moment, and product.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 40px; max-width: 1200px;">
+
+      <!-- Selection Form Card -->
+      <div class="white-card ad-maker-form">
+        <div class="card-header">
+          <h1 class="card-title"><span class="text-teal">Social</span> Ad Maker</h1>
+          <p class="card-subtitle">Create tailored social media ads by selecting your audience, moment, and product.</p>
+        </div>
+        <div class="ad-maker-row">
+          <div class="ad-maker-field">
+            <label class="form-label">Audience</label>
+            <div class="select-wrapper">
+              <select id="adAudienceSelect">
+                <option value="">Select audience</option>
+                <option value="gen-z">Gen Z</option>
+                <option value="millennials">Millennials</option>
+                <option value="families-with-kids">Families with kids</option>
+                <option value="home-chefs">Home Chefs</option>
+                <option value="health-conscious">Health Conscious</option>
+                <option value="busy-professionals">Busy Professionals</option>
+                <option value="coffee-lovers">Coffee Lovers</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="ad-maker-field">
+            <label class="form-label">Moment</label>
+            <div class="select-wrapper">
+              <select id="adMomentSelect">
+                <option value="">Select moment</option>
+                <option value="waking-up">waking up</option>
+                <option value="first-coffee">first coffee</option>
+                <option value="morning-meditation">morning meditation</option>
+                <option value="sunday-morning">sunday morning</option>
+                <option value="getting-kids-ready">getting kids ready for school</option>
+                <option value="working-from-home">working from home</option>
+                <option value="family-dinner">family dinner</option>
+                <option value="weekend-brunch">weekend brunch</option>
+                <option value="meal-prep">meal prep</option>
+                <option value="late-night-snack">late night snack</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="ad-maker-field ad-maker-field-product">
+            <label class="form-label">Product</label>
+            <div class="select-wrapper">
+              <select id="adProductSelect">
+                <option value="">Search for a product</option>
+                <option value="airfryer-xxl">Philips Airfryer XXL</option>
+                <option value="airfryer-compact">Philips Airfryer Compact</option>
+                <option value="lattego-5400">Philips LatteGo 5400</option>
+                <option value="lattego-3200">Philips LatteGo 3200</option>
+                <option value="air-steam-cooker">Philips Air Steam Cooker</option>
+                <option value="air-purifier">Philips Air Purifier</option>
+                <option value="aquatrio-cordless">Philips AquaTrio Cordless</option>
+                <option value="handheld-steamer">Philips Handheld Steamer</option>
+                <option value="saeco-xelsis">Saeco Xelsis Suprema</option>
+                <option value="gaggia-classic">Gaggia Classic Evo</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <button type="button" class="btn-create-ad" id="createAdBtn">
+          Create a social ad →
+        </button>
+      </div>
+
+      <!-- Selected Product Preview -->
+      <div class="selected-product-card white-card" id="selectedProductCard" style="display: none;">
+        <h3 class="selected-product-title">Selected Product</h3>
+        <div class="selected-product-content">
+          <div class="selected-product-image">
+            <img src="https://images.unsplash.com/photo-1648220820291-23a959ef4a48?w=200&h=200&fit=crop" alt="Product" id="selectedProductImg">
+          </div>
+          <div class="selected-product-info">
+            <h4 id="selectedProductName">Philips Airfryer XXL</h4>
+            <span class="selected-product-price" id="selectedProductPrice">$299.99</span>
+            <p class="selected-product-desc" id="selectedProductDesc">The Philips Airfryer XXL uses Rapid Air technology to deliver crispy, delicious results with up to 90% less fat.</p>
+            <button class="remove-selection-btn" id="removeSelectionBtn">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 4l8 8M12 4l-8 8"/>
+              </svg>
+              Remove Selection
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Previous Briefs Section -->
+      <div class="previous-briefs-section">
+        <h2 class="previous-briefs-title">Your Previous Briefs</h2>
+        
+        <div class="briefs-grid">
+          <!-- Brief Card 1 -->
+          <a href="ad-brief.html?id=1" class="brief-card">
+            <h3 class="brief-card-title">Philips Social Ad for Gen Z × sunday morning</h3>
+            <div class="brief-card-meta">
+              <span class="brief-card-date">Created: Jan 20, 2026</span>
+              <div class="brief-card-details">
+                <span>Audience: Gen Z</span>
+                <span>Moment: sunday morning</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Brief Card 2 -->
+          <a href="ad-brief.html?id=2" class="brief-card">
+            <h3 class="brief-card-title">Philips Social Ad for Families with kids × getting kids ready for school</h3>
+            <div class="brief-card-meta">
+              <span class="brief-card-date">Created: Jan 18, 2026</span>
+              <div class="brief-card-details">
+                <span>Audience: Families with kids</span>
+                <span>Moment: getting kids ready for school</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Brief Card 3 -->
+          <a href="ad-brief.html?id=3" class="brief-card">
+            <h3 class="brief-card-title">Philips Social Ad for Coffee Lovers × first coffee</h3>
+            <div class="brief-card-meta">
+              <span class="brief-card-date">Created: Jan 15, 2026</span>
+              <div class="brief-card-details">
+                <span>Audience: Coffee Lovers</span>
+                <span>Moment: first coffee</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Product data
+    const products = {
+      'airfryer-xxl': {
+        name: 'Philips Airfryer XXL',
+        price: '$299.99',
+        desc: 'The Philips Airfryer XXL uses Rapid Air technology to deliver crispy, delicious results with up to 90% less fat.',
+        img: 'https://images.unsplash.com/photo-1648220820291-23a959ef4a48?w=200&h=200&fit=crop'
+      },
+      'airfryer-compact': {
+        name: 'Philips Airfryer Compact',
+        price: '$149.99',
+        desc: 'Perfect for smaller households, delivering the same great taste in a compact design.',
+        img: 'https://images.unsplash.com/photo-1648220820291-23a959ef4a48?w=200&h=200&fit=crop'
+      },
+      'lattego-5400': {
+        name: 'Philips LatteGo 5400',
+        price: '$899.99',
+        desc: 'A fully automatic espresso machine with easy-to-clean milk system for barista-quality coffee at home.',
+        img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop'
+      },
+      'lattego-3200': {
+        name: 'Philips LatteGo 3200',
+        price: '$649.99',
+        desc: 'Enjoy 5 delicious coffee varieties with the intuitive touch display.',
+        img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop'
+      },
+      'air-steam-cooker': {
+        name: 'Philips Air Steam Cooker',
+        price: '$349.99',
+        desc: 'Combining time, temperature and humidity for optimal cooking results every time.',
+        img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop'
+      },
+      'air-purifier': {
+        name: 'Philips Air Purifier',
+        price: '$449.99',
+        desc: 'A powerful 3-in-1 air purifier that cleans, cools and heats your home.',
+        img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&h=200&fit=crop'
+      },
+      'aquatrio-cordless': {
+        name: 'Philips AquaTrio Cordless',
+        price: '$399.99',
+        desc: 'Advanced vacuuming and wet cleaning in one powerful device.',
+        img: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=200&h=200&fit=crop'
+      },
+      'handheld-steamer': {
+        name: 'Philips Handheld Steamer',
+        price: '$79.99',
+        desc: 'Convenient, fast and effective steaming for wrinkle-free clothes.',
+        img: 'https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=200&h=200&fit=crop'
+      },
+      'saeco-xelsis': {
+        name: 'Saeco Xelsis Suprema',
+        price: '$1,699.99',
+        desc: 'Italian heritage meets connected technology for the ultimate coffee experience.',
+        img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop'
+      },
+      'gaggia-classic': {
+        name: 'Gaggia Classic Evo',
+        price: '$549.99',
+        desc: '80 years of history, tradition and experience in every cup.',
+        img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop'
+      }
+    };
+
+    // Product selection
+    const productSelect = document.getElementById('adProductSelect');
+    const productCard = document.getElementById('selectedProductCard');
+    
+    productSelect.addEventListener('change', function() {
+      const value = this.value;
+      if (value && products[value]) {
+        const product = products[value];
+        document.getElementById('selectedProductName').textContent = product.name;
+        document.getElementById('selectedProductPrice').textContent = product.price;
+        document.getElementById('selectedProductDesc').textContent = product.desc;
+        document.getElementById('selectedProductImg').src = product.img;
+        productCard.style.display = 'block';
+      } else {
+        productCard.style.display = 'none';
+      }
+    });
+
+    // Remove selection
+    document.getElementById('removeSelectionBtn').addEventListener('click', function() {
+      productSelect.value = '';
+      productCard.style.display = 'none';
+    });
+
+    // Create ad button
+    document.getElementById('createAdBtn').addEventListener('click', function() {
+      const audience = document.getElementById('adAudienceSelect').value;
+      const moment = document.getElementById('adMomentSelect').value;
+      const product = document.getElementById('adProductSelect').value;
+      
+      if (!audience || !moment || !product) {
+        alert('Please select an audience, moment, and product to create your ad.');
+        return;
+      }
+      
+      // Navigate to brief page
+      window.location.href = `ad-brief.html?audience=${audience}&moment=${moment}&product=${product}`;
+    });
+  </script>
+</body>
+</html>
