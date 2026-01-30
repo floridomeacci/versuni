@@ -1,6 +1,6 @@
 # Versuni Tools
 
-This workspace hosts the static Philips marketing tools (insight generator, creative reviewer, etc.). Deploy the site on Vercel with the API proxy enabled so client-side tools can call OpenAI securely.
+This workspace hosts the static Philips marketing tools (insight generator, creative reviewer, culture map, ad generator). Deploy the site on Vercel with the API proxy enabled so client-side tools can call OpenAI securely without exposing keys.
 
 ## Local Development
 
