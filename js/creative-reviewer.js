@@ -200,7 +200,14 @@ Core Idea: "${coreIdea}"
 ${targetAudience ? `Suggested Audience: "${targetAudience}"` : ''}
 ${targetMarket ? `Suggested Market: "${targetMarket}"` : ''}
 
-Analyze this idea CRITICALLY across all funnel stages. Be honest about weaknesses and provide specific, actionable improvements.
+Analyze this idea CRITICALLY across all funnel stages. Be brutally honest - weak, generic, or off-brand ideas should score below 60. Strong ideas that authentically connect to homemaker needs and platform principles score 75+.
+
+EVALUATION CRITERIA (score harshly if missing):
+- Does it celebrate real homemaking moments (not just product features)?
+- Does it keep Philips as supportive helper (not hero)?
+- Is the tone proudly humble, light-hearted, welcoming, genuine?
+- Does it connect to actual persona rituals and emotional drivers?
+- Would this resonate authentically or feel forced/gimmicky?
 
 ${personaContext}${platformReminder}
 
@@ -580,6 +587,12 @@ ${personaContext}${platformReminder}
 
 Create awareness content that emotionally resonates with this audience in this market. Follow Philips's "sense and simplicity" philosophy - the brand is a background helper, not a hero.
 
+SCORING GUIDELINES:
+- 80-100: Deeply authentic to persona rituals, perfectly aligned with platform tone, celebrates real homemaking
+- 65-79: Good fit but missing some emotional depth or platform alignment
+- 50-64: Generic or partially misaligned with persona needs/platform principles
+- Below 50: Off-brand, forced, or disconnected from actual homemaker reality
+
 Provide:
 - Awareness score (0-100): How effectively this idea creates emotional resonance
 - Score explanation: What drives this score (1 sentence)
@@ -725,6 +738,8 @@ Awareness Score: ${awarenessResult.awarenessScore}
 ${personaContext}${platformReminder}
 
 Create consideration content that answers "Why should I believe this actually works?" Focus on proof, social credibility, and moving from emotional to credible.
+
+Be critical: if the awareness idea was weak or generic, the consideration score should reflect difficulty building credibility for an off-brand concept. Strong platform alignment enables better proof strategies.
 
 Provide:
 - Consideration score (0-100): How credible and trustworthy this feels
@@ -880,6 +895,8 @@ Consideration Score: ${considerationResult.considerationScore}
 ${personaContext}${platformReminder}
 
 Create conversion content that answers "What removes the last hesitation to buy?" Focus on barriers, reassurance, and clear CTAs.
+
+Be realistic: weak or off-brand ideas create more purchase barriers. If earlier scores were mediocre due to poor platform fit, conversion should reflect that difficulty.
 
 Provide:
 - Conversion score (0-100): How likely this drives purchase action
