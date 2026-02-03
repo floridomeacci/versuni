@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Reviewer - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="creative-reviewer.html" class="active">Creative Reviewer</a>
+      <a href="ad-generator.html">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="philips-hero" style="background-image: url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80'); min-height: 280px;">
+    <div class="philips-hero__content">
+      <h1 class="philips-hero__title">Creative Reviewer</h1>
+      <p class="philips-hero__subtitle">From Idea → Trust → Action: Transform raw ideas into funnel-optimized creative concepts</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 40px; max-width: 1400px;">
+      
+      <div class="funnel-layout">
+        <!-- Sticky Progress Sidebar -->
+        <aside class="funnel-progress-sidebar">
+          <div class="funnel-progress-container">
+            <h3 class="funnel-progress-title">Funnel Progress</h3>
+            <p class="funnel-progress-subtitle">From Idea → Trust → Action</p>
+            
+            <div class="funnel-progress-steps">
+              <div class="progress-step" data-step="1">
+                <div class="progress-step-circle">
+                  <span class="progress-step-number">1</span>
+                  <svg class="progress-step-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="3,8 6,11 13,4"></polyline>
+                  </svg>
+                </div>
+                <div class="progress-step-content">
+                  <div class="progress-step-label">Idea Intake</div>
+                  <div class="progress-step-desc">Define core idea</div>
+                </div>
+              </div>
+              
+              <div class="progress-step" data-step="1b">
+                <div class="progress-step-circle">
+                  <span class="progress-step-number">
+                    <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16">
+                      <path d="M8 2a6 6 0 100 12A6 6 0 008 2zm1 9H7V9h2v2zm0-4H7V4h2v3z"/>
+                    </svg>
+                  </span>
+                  <svg class="progress-step-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="3,8 6,11 13,4"></polyline>
+                  </svg>
+                </div>
+                <div class="progress-step-content">
+                  <div class="progress-step-label">Idea Scrutiny</div>
+                  <div class="progress-step-desc">Analyze & improve</div>
+                </div>
+              </div>
+              
+              <div class="progress-step" data-step="2">
+                <div class="progress-step-circle">
+                  <span class="progress-step-number">2</span>
+                  <svg class="progress-step-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="3,8 6,11 13,4"></polyline>
+                  </svg>
+                </div>
+                <div class="progress-step-content">
+                  <div class="progress-step-label">Awareness</div>
+                  <div class="progress-step-desc">Emotional resonance</div>
+                </div>
+              </div>
+              
+              <div class="progress-step" data-step="3">
+                <div class="progress-step-circle">
+                  <span class="progress-step-number">3</span>
+                  <svg class="progress-step-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="3,8 6,11 13,4"></polyline>
+                  </svg>
+                </div>
+                <div class="progress-step-content">
+                  <div class="progress-step-label">Consideration</div>
+                  <div class="progress-step-desc">Build trust</div>
+                </div>
+              </div>
+              
+              <div class="progress-step" data-step="4">
+                <div class="progress-step-circle">
+                  <span class="progress-step-number">4</span>
+                  <svg class="progress-step-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="3,8 6,11 13,4"></polyline>
+                  </svg>
+                </div>
+                <div class="progress-step-content">
+                  <div class="progress-step-label">Conversion</div>
+                  <div class="progress-step-desc">Remove barriers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <div class="funnel-main-content">
+
+      <!-- Step 1: Idea Intake -->
+      <div class="funnel-step-card" id="step1Card">
+        <div class="funnel-step-header">
+          <div class="funnel-step-number">Step 1</div>
+          <h2 class="funnel-step-title">Idea Intake</h2>
+        </div>
+        <p class="funnel-step-description">Enter your raw creative idea and we'll help you expand it across audiences and markets</p>
+        
+        <div>
+          <div class="form-group">
+            <label class="form-label">Core Idea *</label>
+            <textarea id="coreIdea" class="form-textarea" rows="4" placeholder="e.g., A campaign showing how our airfryer makes weeknight cooking effortless" required></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Audience (optional)</label>
+              <input type="text" id="targetAudience" class="form-input" placeholder="e.g., Reluctant Cooks, Busy Parents">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Market (optional)</label>
+              <input type="text" id="targetMarket" class="form-input" placeholder="e.g., NL, USA, UK">
+            </div>
+          </div>
+          
+          <button type="button" class="btn-primary" id="generateCombosBtn">
+            Generate Audience × Market Combinations →
+          </button>
+        </div>
+      </div>
+
+      <!-- Idea Scrutiny Section -->
+      <div class="funnel-step-card" id="ideaScrutinyCard" style="display: none;">
+        <div class="funnel-step-header">
+          <div class="funnel-step-number">Analysis</div>
+          <h2 class="funnel-step-title">Idea Scrutiny</h2>
+        </div>
+        <p class="funnel-step-description">Let's analyze your core idea across the full funnel before expanding</p>
+        
+        <div id="ideaScrutinyResults"></div>
+        
+        <button class="btn-primary" id="proceedToAudiencesBtn" style="margin-top: 24px; display: none;">
+          Continue to Audience Selection →
+        </button>
+      </div>
+
+      <!-- Step 1 Results: Audience x Market Grid -->
+      <div class="funnel-results-section" id="step1Results" style="display: none;">
+        <div class="funnel-section-header">
+          <h3>Select Audience × Market Combinations to Explore</h3>
+          <p>Choose one or more combinations to expand through the funnel</p>
+        </div>
+        <div class="audience-market-grid" id="audienceMarketGrid"></div>
+        <button class="btn-primary" id="proceedToStep2Btn" style="margin-top: 24px; display: none;">
+          Proceed to Awareness Stage →
+        </button>
+      </div>
+
+      <!-- Step 2: Awareness (Expand Idea) -->
+      <div class="funnel-step-card" id="step2Card" style="display: none;">
+        <div class="funnel-step-header">
+          <div class="funnel-step-number">Step 2</div>
+          <h2 class="funnel-step-title">Awareness: Expand Idea</h2>
+          <div class="funnel-step-goal">
+            <strong>Goal:</strong> How does this idea emotionally land for this audience, in this market?
+          </div>
+        </div>
+        
+        <div id="awarenessResults"></div>
+        
+        <button class="btn-primary" id="proceedToStep3Btn" style="margin-top: 24px; display: none;">
+          Proceed to Consideration Stage →
+        </button>
+      </div>
+
+      <!-- Step 3: Consideration -->
+      <div class="funnel-step-card" id="step3Card" style="display: none;">
+        <div class="funnel-step-header">
+          <div class="funnel-step-number">Step 3</div>
+          <h2 class="funnel-step-title">Consideration: Build Trust</h2>
+          <div class="funnel-step-goal">
+            <strong>Goal:</strong> Why should I believe this actually works?
+          </div>
+        </div>
+        
+        <div id="considerationResults"></div>
+        
+        <button class="btn-primary" id="proceedToStep4Btn" style="margin-top: 24px; display: none;">
+          Proceed to Conversion Stage →
+        </button>
+      </div>
+
+      <!-- Step 4: Conversion -->
+      <div class="funnel-step-card" id="step4Card" style="display: none;">
+        <div class="funnel-step-header">
+          <div class="funnel-step-number">Step 4</div>
+          <h2 class="funnel-step-title">Conversion: Remove Barriers</h2>
+          <div class="funnel-step-goal">
+            <strong>Goal:</strong> What removes the last hesitation to buy?
+          </div>
+        </div>
+        
+        <div id="conversionResults"></div>
+        
+        <button class="btn-primary" id="downloadReportBtn" style="margin-top: 24px; display: none;">
+          Download Full Report
+        </button>
+      </div>
+
+      <!-- Final Summary -->
+      <div class="funnel-step-card" id="summaryCard" style="display: none;">
+        <div class="funnel-step-header">
+          <h2 class="funnel-step-title"><span class="text-teal">Funnel</span> Summary</h2>
+        </div>
+        <div id="funnelSummary"></div>
+      </div>
+
+    </div>
+  </main>
+
+        </div><!-- End funnel-main-content -->
+      </div><!-- End funnel-layout -->
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+            <li><a href="https://www.versuni.com/products/saeco-xelsis-suprema/" target="_blank">Saeco Xelsis</a></li>
+            <li><a href="https://www.versuni.com/products/gaggia-classic-evo/" target="_blank">Gaggia Classic</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Newsroom</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Latest News</a></li>
+            <li><a href="https://www.versuni.com/newsroom/" target="_blank">Press Releases</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Suppliers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Become a Supplier</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Careers</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/careers/" target="_blank">Join Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/contact/" target="_blank">General Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <span>© 2025 Philips. All rights reserved</span>
+        <a href="https://www.versuni.com/legal/privacy-notice/" target="_blank">Privacy Notice</a>
+        <a href="https://www.versuni.com/legal/terms-of-use/" target="_blank">Terms of Use</a>
+        <a href="https://www.versuni.com/legal/cookie-policy/" target="_blank">Cookie Policy</a>
+        <a href="https://www.versuni.com/legal/compliance/" target="_blank">Compliance</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/creative-reviewer.js"></script>
+</body>
+</html>
