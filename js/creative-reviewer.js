@@ -71,6 +71,7 @@ async function handleReviewIdea() {
   reviewData.targetMarket = targetMarket;
   
   const btn = document.getElementById('reviewIdeaBtn');
+  const originalBtnText = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span> Analyzing idea...';
   
@@ -90,7 +91,7 @@ async function handleReviewIdea() {
     alert('Error reviewing idea. Please try again.');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = 'Review My Idea →';
+    btn.innerHTML = originalBtnText;
   }
 }
 

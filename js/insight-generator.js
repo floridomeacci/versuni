@@ -70,6 +70,7 @@ async function handleIdeaGeneration() {
   insightData.trend = trend;
   
   const btn = document.getElementById('discoverBtn');
+  const originalBtnText = btn.textContent;
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span> Generating creative idea...';
   
@@ -89,7 +90,7 @@ async function handleIdeaGeneration() {
     alert('Error generating idea. Please try again.');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = 'Discover Trends →';
+    btn.innerHTML = originalBtnText;
   }
 }
 
