@@ -201,6 +201,10 @@ async function expandThroughFunnel(ideaResult) {
   const conversion = await generateConversionContent(consideration);
   insightData.conversionResult = conversion;
   displayConversionResult(conversion);
+  
+  // Generate product recommendations
+  const products = await generateProductRecommendations(ideaResult, awareness, consideration, conversion);
+  displayProductRecommendations(products);
 }
 
 async function generateAwarenessContent(ideaResult) {
@@ -504,6 +508,93 @@ function displayConversionResult(result) {
           </ul>
         </div>
       ` : ''}
+    </div>
+  `;
+}
+
+async function generateProductRecommendations(ideaResult, awareness, consideration, conversion) {
+  const personaDetail = getPersonaDetailForPrompt(insightData.audience);
+  const personaContext = personaDetail ? `Persona Insight: ${personaDetail}\n` : '';
+  
+  const prompt = `You are a product strategist for Philips home appliances. Recommend 2-3 specific Philips products that best support this creative campaign.
+
+Generated Idea: "${insightData.generatedIdea}"
+Audience: ${insightData.audience}
+Market: ${insightData.market}
+
+${personaContext}
+
+AVAILABLE PHILIPS PRODUCT CATEGORIES:
+- Kitchen: Airfryer (XXL, Premium models), Coffee machines (LatteGo, Espresso), Blenders, Food processors, Multicookers
+- Garment Care: Steam irons, Garment steamers, Fabric shavers
+- Air Quality: Air purifiers (Series 2000, 3000, 4000), Humidifiers
+- Premium Brands: Saeco (Xelsis, PicoBaristo), Gaggia (Classic, Anima)
+
+For each product recommendation, explain:
+- Which specific product (be precise with model/line)
+- Why it fits the campaign idea
+- How it connects to the audience's needs
+- Key product benefit that supports the creative concept
+
+Return ONLY a JSON object:
+{
+  "products": [
+    {
+      "name": "Philips Airfryer XXL",
+      "category": "Kitchen",
+      "campaignFit": "Why this product fits the campaign (1-2 sentences)",
+      "audienceConnection": "How it connects to the target audience (1 sentence)",
+      "keyBenefit": "Main benefit that supports the creative idea (1 sentence)",
+      "usageScenario": "Real-life usage moment that fits the campaign (1 sentence)"
+    }
+  ],
+  "campaignIntegration": "How these products could be featured in the campaign execution (2 sentences)"
+}`;
+
+  return await callOpenAI(prompt, 'gpt-4o', true);
+}
+
+function displayProductRecommendations(result) {
+  const funnelContainer = document.getElementById('funnelResults');
+  if (!funnelContainer) return;
+  
+  funnelContainer.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <h3 style="font-size: 20px; font-weight: 700; color: #004C97; margin: 0 0 16px 0;">Recommended Philips Products</h3>
+      <p style="font-size: 14px; color: #6B7280; margin-bottom: 24px;">${result.campaignIntegration}</p>
+      
+      <div style="display: grid; gap: 20px;">
+        ${result.products.map(product => `
+          <div style="background: linear-gradient(135deg, #F8FAFB 0%, #FFFFFF 100%); padding: 20px; border-radius: 12px; border: 1px solid #E5E7EB;">
+            <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 12px;">
+              <div>
+                <h4 style="font-size: 18px; font-weight: 600; color: #0B5ED7; margin: 0 0 4px 0;">${product.name}</h4>
+                <span style="font-size: 13px; color: #6B7280; font-weight: 500;">${product.category}</span>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Campaign Fit</div>
+              <p style="font-size: 14px; color: #1A1A1A; line-height: 1.5; margin: 0;">${product.campaignFit}</p>
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 12px; font-weight: 600; color: #6B7280; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Audience Connection</div>
+              <p style="font-size: 14px; color: #1A1A1A; line-height: 1.5; margin: 0;">${product.audienceConnection}</p>
+            </div>
+            
+            <div style="background: #E8F4FD; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+              <div style="font-size: 12px; font-weight: 600; color: #004C97; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Key Benefit</div>
+              <p style="font-size: 14px; color: #004C97; line-height: 1.5; margin: 0; font-weight: 500;">${product.keyBenefit}</p>
+            </div>
+            
+            <div style="background: #FEF9E7; padding: 12px; border-radius: 8px; border-left: 3px solid #F59E0B;">
+              <div style="font-size: 12px; font-weight: 600; color: #92400E; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Usage Scenario</div>
+              <p style="font-size: 14px; color: #78350F; line-height: 1.5; margin: 0; font-style: italic;">${product.usageScenario}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 }
