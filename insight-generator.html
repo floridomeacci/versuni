@@ -118,27 +118,38 @@
       <div class="trend-intro-grid">
         <!-- Left Info Card -->
         <div class="trend-info-card">
-          <h1 class="card-title"><span class="text-teal">Insight</span> <span class="text-white">Generator</span></h1>
-          <p class="card-subtitle text-white">Discover emerging home trends and match them with Philips products</p>
-          <h2 class="card-section-title"><span class="text-teal">How</span> it works</h2>
+          <h1 class="card-title"><span class="text-teal">Acts of</span> <span class="text-white">Homemaking</span></h1>
+          <p class="card-subtitle text-white">Connect product features to real life moments</p>
+          <h2 class="card-section-title"><span class="text-teal">Framework</span></h2>
           <ul class="trend-info-list">
-            <li>We analyze current discussions and trends across the internet</li>
-            <li>Our AI identifies the most relevant emerging trends</li>
-            <li>We match trends with Philips products and suggest marketing angles</li>
+            <li><strong>Hero Acts:</strong> Big singular acts that are deeply moving</li>
+            <li><strong>Ritual Acts:</strong> Every day, recognizable and repeatable</li>
+            <li><strong>Micro Acts:</strong> Small invisible acts of care</li>
           </ul>
           
           <div class="trend-note">
-            <strong>Note:</strong>
-            <p><em>This tool provides real-time trend insights but should be used alongside traditional market research for best results.</em></p>
+            <strong>Philosophy:</strong>
+            <p><em>It's the (often unseen) things we do to turn a house into a home. Transformative. Intentional. Consequential.</em></p>
           </div>
         </div>
         
         <!-- Right Input Card -->
         <div class="trend-input-card">
-          <label class="form-label">Let's explore trends in:</label>
-          <textarea class="trend-textarea" placeholder="living room furniture, kitchen storage, home office..."></textarea>
+          <label class="form-label">Market:</label>
+          <input type="text" id="marketInput" class="trend-textarea" style="min-height: auto; margin-bottom: 16px;" placeholder="e.g., USA, Netherlands, UK, Germany..." />
+          
+          <label class="form-label">Product Feature to Emphasize:</label>
+          <select id="featureInput" class="trend-textarea" style="min-height: auto;">
+            <option value="">Select a feature...</option>
+            <option value="SteamFry">SteamFry (crispy + juicy)</option>
+            <option value="AirFry">AirFry (healthy frying)</option>
+            <option value="SteamClean">Steam Clean (easy cleanup)</option>
+            <option value="EveryBiteTasty">Every Bite is Tasty</option>
+            <option value="MealsVariety">More Meals & Variety</option>
+          </select>
+          
           <button class="btn-discover" id="discoverBtn">
-            Discover Trends →
+            Generate Insights →
           </button>
         </div>
       </div>
