@@ -117,14 +117,13 @@
           </div>
         </div>
         
-        <!-- Additional Context Field -->
-        <div class="ad-maker-field" style="margin-top: 24px;">
-          <label class="form-label">Additional Context (Optional)</label>
+        <!-- Additional Context Field - VISIBLE -->
+        <div style="margin-top: 32px; margin-bottom: 24px;">
+          <label class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600;">📝 Additional Context (Optional)</label>
           <textarea 
             id="adContextInput" 
-            class="trend-textarea" 
-            style="min-height: 100px; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; resize: vertical;" 
-            placeholder="Add specific direction, tone, or context for the ads... e.g., 'Focus on sustainability', 'Emphasize time-saving benefits', 'Target working parents'"></textarea>
+            style="min-height: 100px; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; padding: 14px; border: 2px solid #E5E7EB; border-radius: 8px; resize: vertical; box-sizing: border-box;" 
+            placeholder="Add any specific direction, tone, or context... e.g., 'Focus on sustainability', 'Emphasize time-saving', 'Show family moments'"></textarea>
         </div>
         
         <!-- Funnel Stage Selector -->
@@ -161,6 +160,21 @@
         <button type="button" class="btn-create-ad" id="createAdBtn" style="margin-top: 16px;">
           Generate Ads with AI →
         </button>
+      </div>
+
+      <!-- Selected Product Preview -->
+      <div class="selected-product-card white-card" id="selectedProductCard" style="display: none; margin-top: 32px;">
+        <h3 style="font-size: 18px; font-weight: 700; color: #1A1A1A; margin: 0 0 16px 0;">Selected Product</h3>
+        <div style="display: flex; gap: 24px; align-items: flex-start;">
+          <div style="flex-shrink: 0;">
+            <img src="https://images.unsplash.com/photo-1648220820291-23a959ef4a48?w=200&h=200&fit=crop" alt="Product" id="selectedProductImg" style="width: 120px; height: 120px; border-radius: 12px; object-fit: cover;">
+          </div>
+          <div style="flex: 1;">
+            <h4 id="selectedProductName" style="font-size: 20px; font-weight: 700; color: #004C97; margin: 0 0 8px 0;">Philips Airfryer XXL</h4>
+            <p id="selectedProductPrice" style="font-size: 24px; font-weight: 700; color: #22C55E; margin: 0 0 12px 0;">$299.99</p>
+            <p id="selectedProductDesc" style="font-size: 14px; color: #6B7280; line-height: 1.6; margin: 0;">The Philips Airfryer XXL uses Rapid Air technology to deliver crispy, delicious results with up to 90% less fat.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Generated Ads Results Container -->
