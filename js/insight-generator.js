@@ -31,6 +31,7 @@ const DEFAULT_PLATFORM_SUMMARY = [
 let insightData = {
   market: '',
   feature: '',
+  additional: '',
   acts: null
 };
 
@@ -69,9 +70,11 @@ function updateProgress(step) {
 async function handleIdeaGeneration() {
   const marketInput = document.getElementById('marketInput');
   const featureInput = document.getElementById('featureInput');
+  const additionalInput = document.getElementById('additionalInput');
   
   const market = marketInput?.value.trim();
   const feature = featureInput?.value;
+  const additional = additionalInput?.value.trim();
   
   if (!market) {
     alert('Please enter a market');
@@ -85,6 +88,7 @@ async function handleIdeaGeneration() {
   
   insightData.market = market;
   insightData.feature = feature;
+  insightData.additional = additional;
   
   const btn = document.getElementById('discoverBtn');
   const originalBtnHtml = btn.innerHTML;
@@ -94,7 +98,7 @@ async function handleIdeaGeneration() {
   updateProgress(2); // Move to generation
   
   try {
-    const acts = await generateHomemakingActs(market, feature);
+    const acts = await generateHomemakingActs(market, feature, additional);
     insightData.acts = acts;
     displayHomemakingActs(acts);
     
@@ -110,11 +114,17 @@ async function handleIdeaGeneration() {
   }
 }
 
-async function generateHomemakingActs(market, feature) {
+async function generateHomemakingActs(market, feature, additional = '') {
+  const additionalContext = additional ? `
+
+ADDITIONAL CONTEXT:
+${additional}
+` : '';
+  
   const prompt = `You are a creative strategist for Philips kitchen appliances, specializing in the "Acts of Homemaking" framework.
 
 Market: ${market}
-Product Feature: ${feature}
+Product Feature: ${feature}${additionalContext}
 
 ACTS OF HOMEMAKING FRAMEWORK:
 It's the (often unseen) things we do to turn a house into a home. They are:
@@ -218,9 +228,13 @@ function displayHomemakingActs(result) {
           <p style="font-size: 14px; color: #6B7280; margin: 4px 0 0 0;">${insightData.market} × ${insightData.feature}</p>
         </div>
       </div>
-      <p style="font-size: 14px; color: #6B7280; line-height: 1.6; margin-bottom: 24px;">
+      <p style="font-size: 14px; color: #6B7280; line-height: 1.6; margin-bottom: ${insightData.additional ? '12px' : '24px'};">
         Connecting product features to real life moments - the acts of care that transform how those moments feel.
       </p>
+      ${insightData.additional ? `<div style="background: #F8FAFB; padding: 12px 16px; border-radius: 8px; border-left: 3px solid #0B5ED7; margin-bottom: 24px;">
+        <div style="font-size: 11px; font-weight: 700; color: #6B7280; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Context</div>
+        <p style="font-size: 13px; color: #1A1A1A; margin: 0; line-height: 1.5;">${insightData.additional}</p>
+      </div>` : ''}
     </div>
     
     ${generateActSection('Hero Acts', 'Big singular acts that are deeply moving', result.heroActs, '#8B5CF6')}

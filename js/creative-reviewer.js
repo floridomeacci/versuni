@@ -41,7 +41,9 @@ let reviewData = {
   coreIdea: '',
   targetAudience: '',
   targetMarket: '',
-  scrutinyResult: null,
+  desireResult: null,
+  engageResult: null,
+  convertResult: null,
   audienceCombinations: []
 };
 
@@ -76,12 +78,26 @@ async function handleReviewIdea() {
   btn.innerHTML = '<span class="loading-spinner"></span> Analyzing idea...';
   
   try {
-    // Step 1: Scrutinize the idea
-    const scrutinyResult = await scrutinizeIdea(coreIdea, targetAudience, targetMarket);
-    reviewData.scrutinyResult = scrutinyResult;
-    displayScrutinyResult(scrutinyResult);
+    // Step 1: Evaluate DESIRE stage
+    btn.innerHTML = '<span class="loading-spinner"></span> Evaluating Desire stage...';
+    const desireResult = await evaluateDesireStage(coreIdea, targetAudience, targetMarket);
+    reviewData.desireResult = desireResult;
+    displayDesireResult(desireResult);
     
-    // Step 2: Generate audience/market combinations
+    // Step 2: Evaluate ENGAGE stage
+    btn.innerHTML = '<span class="loading-spinner"></span> Evaluating Engage stage...';
+    const engageResult = await evaluateEngageStage(coreIdea, targetAudience, targetMarket);
+    reviewData.engageResult = engageResult;
+    displayEngageResult(engageResult);
+    
+    // Step 3: Evaluate CONVERT stage
+    btn.innerHTML = '<span class="loading-spinner"></span> Evaluating Convert stage...';
+    const convertResult = await evaluateConvertStage(coreIdea, targetAudience, targetMarket);
+    reviewData.convertResult = convertResult;
+    displayConvertResult(convertResult);
+    
+    // Step 4: Generate audience/market combinations
+    btn.innerHTML = '<span class="loading-spinner"></span> Generating audience combinations...';
     const combinations = await generateCombinations(coreIdea, targetAudience, targetMarket);
     reviewData.audienceCombinations = combinations;
     displayCombinations(combinations);
@@ -95,145 +111,315 @@ async function handleReviewIdea() {
   }
 }
 
-async function scrutinizeIdea(coreIdea, targetAudience, targetMarket) {
+async function evaluateDesireStage(coreIdea, targetAudience, targetMarket) {
   const personaDetail = getPersonaDetailForPrompt(targetAudience);
   const personaContext = personaDetail ? `Relevant Philips persona detail:\n${personaDetail}\n\n` : '';
-  const platformReminder = philipsPlatformPromptBlock ? 'Honor the Philips "Made for the Homemakers" platform that celebrates real-life homemaking, emotional connection, and tone of voice that is proudly humble, light-hearted, welcoming, and genuine.\n\n' : '';
+  const platformReminder = philipsPlatformPromptBlock ? 'Honor the Philips "Made for the Homemakers" platform.\n\n' : '';
   
-  const prompt = `You are a senior creative strategist for Philips home appliances. Deeply scrutinize this creative idea.
+  const prompt = `You are a senior creative strategist for Philips home appliances. Evaluate this creative idea for the DESIRE stage.
 
 Core Idea: "${coreIdea}"
-${targetAudience ? `Suggested Audience: "${targetAudience}"` : ''}
-${targetMarket ? `Suggested Market: "${targetMarket}"` : ''}
-
-Analyze this idea CRITICALLY. Be brutally honest - weak, generic, or off-brand ideas should score below 60. Strong ideas that authentically connect to homemaker needs and platform principles score 75+.
-
-EVALUATION CRITERIA (score harshly if missing):
-- Does it celebrate real homemaking moments (not just product features)?
-- Does it keep Philips as supportive helper (not hero)?
-- Is the tone proudly humble, light-hearted, welcoming, genuine?
-- Does it connect to actual persona rituals and emotional drivers?
-- Would this resonate authentically or feel forced/gimmicky?
+${targetAudience ? `Target Audience: "${targetAudience}"` : ''}
+${targetMarket ? `Target Market: "${targetMarket}"` : ''}
 
 ${personaContext}${platformReminder}
 
+DESIRE STAGE CRITERIA:
+- Role: Declare Leadership - Get people to think of Philips as the preferred brand when they think of Airfryers
+- Task: Build brand preference and superiority associations
+- Media Approach: Place Philips in premium & emotive environments that drive superiority associations
+- Channels: AV, YouTube, OLV, Social, Creators, Digital Outdoor
+- KPIs: Brand searches, Brand tracking, Brand lift, Ad recall, Brand score, Preference
+
+Evaluate:
+1. Does this idea position Philips as category leader?
+2. Does it create premium/aspirational brand associations?
+3. Will it drive brand preference and consideration?
+4. Does it work in premium media environments (AV, OLV)?
+
 Return ONLY a JSON object:
 {
-  "overallScore": 72,
-  "overallAssessment": "2-3 sentence summary of the idea's potential and main challenges",
-  "coreStrengths": ["Strength 1", "Strength 2", "Strength 3"],
-  "coreWeaknesses": ["Weakness 1", "Weakness 2"],
-  "brandAlignment": {
-    "score": 75,
-    "explanation": "How well this fits the Philips platform (2 sentences)"
-  },
-  "audienceFit": {
-    "score": 70,
-    "explanation": "How well this connects to homemaker personas (2 sentences)"
-  },
-  "emotionalResonance": {
-    "score": 68,
-    "explanation": "Potential for emotional connection (2 sentences)"
-  },
-  "recommendedRefinement": "How to improve the core idea (2-3 sentences)",
-  "shouldProceed": true
+  "score": 75,
+  "leadership": "How well does this declare Philips leadership? (2 sentences)",
+  "brandPreference": "Will this make people prefer Philips over competitors? (2 sentences)",
+  "premiumPositioning": "Does this position Philips as premium/aspirational? (2 sentences)",
+  "mediaFit": "How well will this work in premium AV and digital environments? (1-2 sentences)",
+  "strengths": ["Strength 1", "Strength 2"],
+  "weaknesses": ["Weakness 1", "Weakness 2"],
+  "recommendations": "How to improve for DESIRE stage (2 sentences)"
 }`;
 
   return await callOpenAI(prompt, 'gpt-4o', true);
 }
 
-function displayScrutinyResult(result) {
+async function evaluateEngageStage(coreIdea, targetAudience, targetMarket) {
+  const personaDetail = getPersonaDetailForPrompt(targetAudience);
+  const personaContext = personaDetail ? `Relevant Philips persona detail:\n${personaDetail}\n\n` : '';
+  
+  const prompt = `You are a senior creative strategist for Philips home appliances. Evaluate this creative idea for the ENGAGE stage.
+
+Core Idea: "${coreIdea}"
+${targetAudience ? `Target Audience: "${targetAudience}"` : ''}
+${targetMarket ? `Target Market: "${targetMarket}"` : ''}
+
+${personaContext}
+
+ENGAGE STAGE CRITERIA:
+- Role: Activate the Community - Constantly remind people of Philips Airfryer and key product benefits
+- Task: Build ongoing engagement through participation and authentic content
+- Media Approach: Authentic engagement that invites participation, breaking away from conventions to cut through
+- Channels: AV, Partnerships, YouTube/OLV, Social, Creators, Contextual Display
+- KPIs: Engagement, Brand lift (consideration), Product searches, Share of search
+
+Evaluate:
+1. Does this invite community participation and engagement?
+2. Does it authentically showcase product benefits in real-life usage?
+3. Will it break through the noise and feel fresh/different?
+4. Does it work across social, creators, and partnership channels?
+
+Return ONLY a JSON object:
+{
+  "score": 78,
+  "communityActivation": "How well does this activate community participation? (2 sentences)",
+  "benefitShowcase": "Does this authentically remind people of Philips benefits? (2 sentences)",
+  "cutThrough": "Will this break conventions and cut through the noise? (2 sentences)",
+  "channelFit": "How well will this work across social, creators, partnerships? (1-2 sentences)",
+  "strengths": ["Strength 1", "Strength 2"],
+  "weaknesses": ["Weakness 1", "Weakness 2"],
+  "recommendations": "How to improve for ENGAGE stage (2 sentences)"
+}`;
+
+  return await callOpenAI(prompt, 'gpt-4o', true);
+}
+
+async function evaluateConvertStage(coreIdea, targetAudience, targetMarket) {
+  const personaDetail = getPersonaDetailForPrompt(targetAudience);
+  const personaContext = personaDetail ? `Relevant Philips persona detail:\n${personaDetail}\n\n` : '';
+  
+  const prompt = `You are a senior creative strategist for Philips home appliances. Evaluate this creative idea for the CONVERT stage.
+
+Core Idea: "${coreIdea}"
+${targetAudience ? `Target Audience: "${targetAudience}"` : ''}
+${targetMarket ? `Target Market: "${targetMarket}"` : ''}
+
+${personaContext}
+
+CONVERT STAGE CRITERIA:
+- Role: Enlist Buyers - Provide pathways for people to purchase Philips Airfryer
+- Task: Capture in-market consumers and drive purchase intent
+- Media Approach: Always-on digital availability to capture in-market consumers
+- Channels: Meta, Online display (Google Discovery & Amazon DSP), paid search, Amazon Performance (Biddable)
+- KPIs: Sales/1st party collection, Click share of category generics
+
+Evaluate:
+1. Does this create clear pathways to purchase?
+2. Will it capture in-market consumers actively searching?
+3. Does it work in performance/commerce environments?
+4. Can it drive immediate action and conversion?
+
+Return ONLY a JSON object:
+{
+  "score": 72,
+  "purchasePathways": "How well does this create clear paths to purchase? (2 sentences)",
+  "inMarketCapture": "Will this capture people actively ready to buy? (2 sentences)",
+  "performanceFit": "Does this work in Google/Amazon/Meta performance channels? (2 sentences)",
+  "conversionPotential": "Will this drive immediate purchase action? (1-2 sentences)",
+  "strengths": ["Strength 1", "Strength 2"],
+  "weaknesses": ["Weakness 1", "Weakness 2"],
+  "recommendations": "How to improve for CONVERT stage (2 sentences)"
+}`;
+
+  return await callOpenAI(prompt, 'gpt-4o', true);
+}
+
+function displayDesireResult(result) {
   const container = document.getElementById('scrutinyResults');
   const card = document.getElementById('scrutinyCard');
   
   container.innerHTML = `
-    <div style="background: linear-gradient(135deg, #E8F4FD 0%, #F8FAFB 100%); padding: 24px; border-radius: 12px; border-left: 4px solid #0B5ED7; margin-bottom: 24px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-        <h3 style="font-size: 18px; font-weight: 600; color: #004C97; margin: 0;">Overall Assessment</h3>
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 3px solid #0B5ED7; padding-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #0B5ED7; margin: 0;">DESIRE Stage</h3>
+          <p style="font-size: 13px; color: #6B7280; margin: 4px 0 0 0;">Declare Leadership - Build brand preference</p>
+        </div>
         <div class="score-indicator">
           <div class="score-bar">
-            <div class="score-marker" style="left: ${result.overallScore}%"></div>
+            <div class="score-marker" style="left: ${result.score}%"></div>
           </div>
-          <span class="score-label ${getScoreClass(result.overallScore)}">${result.overallScore}</span>
+          <span class="score-label ${getScoreClass(result.score)}">${result.score}</span>
         </div>
-      </div>
-      <p style="font-size: 15px; color: #1A1A1A; line-height: 1.6;">${result.overallAssessment}</p>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-      <div style="background: #F0FDF4; padding: 16px; border-radius: 8px; border-left: 4px solid #22C55E;">
-        <h4 style="font-size: 14px; font-weight: 600; color: #166534; margin: 0 0 12px 0;">Core Strengths</h4>
-        <ul style="font-size: 13px; color: #166534; margin: 0; padding-left: 20px;">
-          ${result.coreStrengths.map(s => `<li style="margin-bottom: 6px;">${s}</li>`).join('')}
-        </ul>
       </div>
       
-      <div style="background: #FEF2F2; padding: 16px; border-radius: 8px; border-left: 4px solid #EF4444;">
-        <h4 style="font-size: 14px; font-weight: 600; color: #991B1B; margin: 0 0 12px 0;">Core Weaknesses</h4>
-        <ul style="font-size: 13px; color: #991B1B; margin: 0; padding-left: 20px;">
-          ${result.coreWeaknesses.map(w => `<li style="margin-bottom: 6px;">${w}</li>`).join('')}
-        </ul>
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Leadership Declaration</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.leadership}</p>
       </div>
-    </div>
-    
-    <h3 style="font-size: 18px; font-weight: 600; color: #004C97; margin-bottom: 16px;">Detailed Analysis</h3>
-    
-    <div class="funnel-output-card">
-      <div class="funnel-output-header">
-        <div>
-          <div class="funnel-output-title">Brand Alignment</div>
-          <div class="funnel-output-subtitle">How well does this fit the Philips platform?</div>
-        </div>
-        <div class="score-indicator">
-          <div class="score-bar">
-            <div class="score-marker" style="left: ${result.brandAlignment.score}%"></div>
-          </div>
-          <span class="score-label ${getScoreClass(result.brandAlignment.score)}">${result.brandAlignment.score}</span>
-        </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Brand Preference Impact</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.brandPreference}</p>
       </div>
-      <p style="font-size: 14px; color: #374151; line-height: 1.6; margin: 0;">${result.brandAlignment.explanation}</p>
-    </div>
-    
-    <div class="funnel-output-card">
-      <div class="funnel-output-header">
-        <div>
-          <div class="funnel-output-title">Audience Fit</div>
-          <div class="funnel-output-subtitle">How well does this connect to homemakers?</div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Premium Positioning</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.premiumPositioning}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Media Fit (AV, YouTube, OLV, Social)</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.mediaFit}</p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+        <div style="background: #F0FDF4; padding: 14px; border-radius: 8px; border-left: 3px solid #22C55E;">
+          <div style="font-size: 11px; font-weight: 700; color: #166534; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Strengths</div>
+          <ul style="font-size: 13px; color: #166534; margin: 0; padding-left: 18px;">
+            ${result.strengths.map(s => `<li style="margin-bottom: 4px;">${s}</li>`).join('')}
+          </ul>
         </div>
-        <div class="score-indicator">
-          <div class="score-bar">
-            <div class="score-marker" style="left: ${result.audienceFit.score}%"></div>
-          </div>
-          <span class="score-label ${getScoreClass(result.audienceFit.score)}">${result.audienceFit.score}</span>
+        
+        <div style="background: #FEF2F2; padding: 14px; border-radius: 8px; border-left: 3px solid #EF4444;">
+          <div style="font-size: 11px; font-weight: 700; color: #991B1B; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Weaknesses</div>
+          <ul style="font-size: 13px; color: #991B1B; margin: 0; padding-left: 18px;">
+            ${result.weaknesses.map(w => `<li style="margin-bottom: 4px;">${w}</li>`).join('')}
+          </ul>
         </div>
       </div>
-      <p style="font-size: 14px; color: #374151; line-height: 1.6; margin: 0;">${result.audienceFit.explanation}</p>
-    </div>
-    
-    <div class="funnel-output-card">
-      <div class="funnel-output-header">
-        <div>
-          <div class="funnel-output-title">Emotional Resonance</div>
-          <div class="funnel-output-subtitle">Potential for authentic emotional connection</div>
-        </div>
-        <div class="score-indicator">
-          <div class="score-bar">
-            <div class="score-marker" style="left: ${result.emotionalResonance.score}%"></div>
-          </div>
-          <span class="score-label ${getScoreClass(result.emotionalResonance.score)}">${result.emotionalResonance.score}</span>
-        </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 3px solid #F59E0B; margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #92400E; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Recommendations</div>
+        <p style="font-size: 14px; color: #78350F; line-height: 1.6; margin: 0;">${result.recommendations}</p>
       </div>
-      <p style="font-size: 14px; color: #374151; line-height: 1.6; margin: 0;">${result.emotionalResonance.explanation}</p>
-    </div>
-    
-    <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FEF9E7 100%); padding: 20px; border-radius: 8px; border-left: 4px solid #F59E0B; margin-top: 24px;">
-      <h4 style="font-size: 16px; font-weight: 600; color: #92400E; margin: 0 0 12px 0;">Recommended Refinement</h4>
-      <p style="font-size: 14px; color: #78350F; line-height: 1.6; margin: 0;">${result.recommendedRefinement}</p>
     </div>
   `;
   
   card.style.display = 'block';
   card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function displayEngageResult(result) {
+  const container = document.getElementById('scrutinyResults');
+  
+  container.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 3px solid #0891B2; padding-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #0891B2; margin: 0;">ENGAGE Stage</h3>
+          <p style="font-size: 13px; color: #6B7280; margin: 4px 0 0 0;">Activate the Community - Build ongoing engagement</p>
+        </div>
+        <div class="score-indicator">
+          <div class="score-bar">
+            <div class="score-marker" style="left: ${result.score}%"></div>
+          </div>
+          <span class="score-label ${getScoreClass(result.score)}">${result.score}</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Community Activation</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.communityActivation}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Benefit Showcase</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.benefitShowcase}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Cut Through</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.cutThrough}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Channel Fit (Social, Creators, Partnerships)</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.channelFit}</p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+        <div style="background: #F0FDF4; padding: 14px; border-radius: 8px; border-left: 3px solid #22C55E;">
+          <div style="font-size: 11px; font-weight: 700; color: #166534; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Strengths</div>
+          <ul style="font-size: 13px; color: #166534; margin: 0; padding-left: 18px;">
+            ${result.strengths.map(s => `<li style="margin-bottom: 4px;">${s}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div style="background: #FEF2F2; padding: 14px; border-radius: 8px; border-left: 3px solid #EF4444;">
+          <div style="font-size: 11px; font-weight: 700; color: #991B1B; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Weaknesses</div>
+          <ul style="font-size: 13px; color: #991B1B; margin: 0; padding-left: 18px;">
+            ${result.weaknesses.map(w => `<li style="margin-bottom: 4px;">${w}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 3px solid #F59E0B; margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #92400E; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Recommendations</div>
+        <p style="font-size: 14px; color: #78350F; line-height: 1.6; margin: 0;">${result.recommendations}</p>
+      </div>
+    </div>
+  `;
+}
+
+function displayConvertResult(result) {
+  const container = document.getElementById('scrutinyResults');
+  
+  container.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 3px solid #22C55E; padding-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #22C55E; margin: 0;">CONVERT Stage</h3>
+          <p style="font-size: 13px; color: #6B7280; margin: 4px 0 0 0;">Enlist Buyers - Provide clear pathways to purchase</p>
+        </div>
+        <div class="score-indicator">
+          <div class="score-bar">
+            <div class="score-marker" style="left: ${result.score}%"></div>
+          </div>
+          <span class="score-label ${getScoreClass(result.score)}">${result.score}</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Purchase Pathways</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.purchasePathways}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">In-Market Capture</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.inMarketCapture}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Performance Channel Fit</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.performanceFit}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Conversion Potential (Meta, Google, Amazon)</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.conversionPotential}</p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+        <div style="background: #F0FDF4; padding: 14px; border-radius: 8px; border-left: 3px solid #22C55E;">
+          <div style="font-size: 11px; font-weight: 700; color: #166534; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Strengths</div>
+          <ul style="font-size: 13px; color: #166534; margin: 0; padding-left: 18px;">
+            ${result.strengths.map(s => `<li style="margin-bottom: 4px;">${s}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div style="background: #FEF2F2; padding: 14px; border-radius: 8px; border-left: 3px solid #EF4444;">
+          <div style="font-size: 11px; font-weight: 700; color: #991B1B; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Weaknesses</div>
+          <ul style="font-size: 13px; color: #991B1B; margin: 0; padding-left: 18px;">
+            ${result.weaknesses.map(w => `<li style="margin-bottom: 4px;">${w}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 3px solid #F59E0B; margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #92400E; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;">Recommendations</div>
+        <p style="font-size: 14px; color: #78350F; line-height: 1.6; margin: 0;">${result.recommendations}</p>
+      </div>
+    </div>
+  `;
 }
 
 async function generateCombinations(coreIdea, targetAudience, targetMarket) {
