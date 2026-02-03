@@ -53,7 +53,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (discoverBtn) {
     discoverBtn.addEventListener('click', handleIdeaGeneration);
   }
+  
+  updateProgress(1); // Start at step 1
 });
+
+// Progress tracking
+function updateProgress(step) {
+  const steps = document.querySelectorAll('.progress-step');
+  
+  steps.forEach((stepEl) => {
+    const stepNum = parseInt(stepEl.dataset.step);
+    
+    if (stepNum < step) {
+      stepEl.classList.add('completed');
+      stepEl.classList.remove('active');
+    } else if (stepNum === step) {
+      stepEl.classList.add('active');
+      stepEl.classList.remove('completed');
+    } else {
+      stepEl.classList.remove('active', 'completed');
+    }
+  });
+}
 
 // Generate creative idea from trend input
 async function handleIdeaGeneration() {
@@ -72,6 +93,8 @@ async function handleIdeaGeneration() {
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span><span>Generating creative idea...</span>';
   
+  updateProgress(2); // Move to idea generation
+  
   try {
     const ideaResult = await generateCreativeIdea(trend);
     insightData.generatedIdea = ideaResult.idea;
@@ -81,13 +104,17 @@ async function handleIdeaGeneration() {
     displayGeneratedIdea(ideaResult);
     
     btn.innerHTML = '<span class="loading-spinner"></span><span>Expanding through funnel...</span>';
+    updateProgress(3); // Move to awareness
     
     // Auto-expand through funnel
     await expandThroughFunnel(ideaResult);
     
+    updateProgress(6); // Complete all steps
+    
   } catch (error) {
     console.error('Error:', error);
     alert('Error generating idea. Please try again.');
+    updateProgress(1); // Reset to start
   } finally {
     btn.disabled = false;
     btn.innerHTML = originalBtnHtml;
@@ -161,10 +188,14 @@ async function expandThroughFunnel(ideaResult) {
   insightData.awarenessResult = awareness;
   displayAwarenessResult(awareness);
   
+  updateProgress(4); // Move to consideration
+  
   // Generate consideration
   const consideration = await generateConsiderationContent(awareness);
   insightData.considerationResult = consideration;
   displayConsiderationResult(consideration);
+  
+  updateProgress(5); // Move to conversion
   
   // Generate conversion
   const conversion = await generateConversionContent(consideration);
