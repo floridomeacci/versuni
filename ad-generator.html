@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Generator V2.0 - Philips AI Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">
+      <img src="philips-logo.svg" alt="Philips">
+    </a>
+    <nav class="nav">
+      <a href="insight-generator.html">Insight Generator</a>
+      <a href="creative-reviewer.html">Creative Reviewer</a>
+      <a href="ad-generator.html" class="active">Ad Generator</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Rainbow Gradient -->
+  <section class="philips-hero" style="background: linear-gradient(135deg, #0B5ED7 0%, #0891B2 50%, #22C55E 100%); min-height: 320px;">
+    <div class="philips-hero__content">
+      <h1 class="philips-hero__title" style="font-size: 52px; font-weight: 800; text-shadow: 2px 2px 8px rgba(0,0,0,0.2);">
+        🎯 Philips Ad Generator V2.0
+      </h1>
+      <p class="philips-hero__subtitle" style="font-size: 22px; font-weight: 600; text-shadow: 1px 1px 4px rgba(0,0,0,0.2);">
+        ✨ NEW: Desire/Engage/Convert Framework + Optional Context Input
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main main-dashboard">
+    <div class="page-container" style="padding-top: 40px; max-width: 1200px;">
+
+      <!-- Ad Creation Form -->
+      <div class="white-card ad-maker-form">
+        <div class="card-header">
+          <h1 class="card-title">
+            <span style="background: linear-gradient(135deg, #0B5ED7, #0891B2, #22C55E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              🚀 UPDATED
+            </span> 
+            Social Ad Generator
+          </h1>
+          <p class="card-subtitle">Select audience, moment, product, funnel stage, and add optional context for AI-powered ad generation</p>
+        </div>
+
+        <!-- Selection Row -->
+        <div class="ad-maker-row">
+          <div class="ad-maker-field">
+            <label class="form-label">Audience</label>
+            <div class="select-wrapper">
+              <select id="adAudienceSelect">
+                <option value="">Select audience</option>
+                <option value="gen-z">Gen Z</option>
+                <option value="millennials">Millennials</option>
+                <option value="families-with-kids">Families with kids</option>
+                <option value="home-chefs">Home Chefs</option>
+                <option value="health-conscious">Health Conscious</option>
+                <option value="busy-professionals">Busy Professionals</option>
+                <option value="coffee-lovers">Coffee Lovers</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="ad-maker-field">
+            <label class="form-label">Moment</label>
+            <div class="select-wrapper">
+              <select id="adMomentSelect">
+                <option value="">Select moment</option>
+                <option value="waking-up">waking up</option>
+                <option value="first-coffee">first coffee</option>
+                <option value="morning-meditation">morning meditation</option>
+                <option value="sunday-morning">sunday morning</option>
+                <option value="getting-kids-ready">getting kids ready for school</option>
+                <option value="working-from-home">working from home</option>
+                <option value="family-dinner">family dinner</option>
+                <option value="weekend-brunch">weekend brunch</option>
+                <option value="meal-prep">meal prep</option>
+                <option value="late-night-snack">late night snack</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="ad-maker-field ad-maker-field-product">
+            <label class="form-label">Product</label>
+            <div class="select-wrapper">
+              <select id="adProductSelect">
+                <option value="">Search for a product</option>
+                <option value="airfryer-xxl">Philips Airfryer XXL</option>
+                <option value="airfryer-compact">Philips Airfryer Compact</option>
+                <option value="lattego-5400">Philips LatteGo 5400</option>
+                <option value="lattego-3200">Philips LatteGo 3200</option>
+                <option value="air-steam-cooker">Philips Air Steam Cooker</option>
+                <option value="air-purifier">Philips Air Purifier</option>
+                <option value="aquatrio-cordless">Philips AquaTrio Cordless</option>
+                <option value="handheld-steamer">Philips Handheld Steamer</option>
+                <option value="saeco-xelsis">Saeco Xelsis Suprema</option>
+                <option value="gaggia-classic">Gaggia Classic Evo</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6l4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Additional Context Field -->
+        <div class="ad-maker-field" style="margin-top: 24px;">
+          <label class="form-label">Additional Context (Optional)</label>
+          <textarea 
+            id="adContextInput" 
+            class="trend-textarea" 
+            style="min-height: 100px; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; resize: vertical;" 
+            placeholder="Add specific direction, tone, or context for the ads... e.g., 'Focus on sustainability', 'Emphasize time-saving benefits', 'Target working parents'"></textarea>
+        </div>
+        
+        <!-- Funnel Stage Selector -->
+        <div style="margin: 32px 0 24px 0;">
+          <label class="form-label" style="margin-bottom: 12px; display: block;">Funnel Stage</label>
+          <div style="display: flex; gap: 12px;">
+            <button 
+              type="button" 
+              class="funnel-stage-btn active" 
+              data-stage="desire" 
+              style="flex: 1; padding: 20px 16px; border: 3px solid #0B5ED7; background: #0B5ED7; color: white; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(11, 94, 215, 0.3);">
+              DESIRE<br>
+              <span style="font-size: 13px; font-weight: 500; opacity: 0.95;">Declare Leadership</span>
+            </button>
+            <button 
+              type="button" 
+              class="funnel-stage-btn" 
+              data-stage="engage" 
+              style="flex: 1; padding: 20px 16px; border: 3px solid #0891B2; background: white; color: #0891B2; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+              ENGAGE<br>
+              <span style="font-size: 13px; font-weight: 500;">Activate Community</span>
+            </button>
+            <button 
+              type="button" 
+              class="funnel-stage-btn" 
+              data-stage="convert" 
+              style="flex: 1; padding: 20px 16px; border: 3px solid #22C55E; background: white; color: #22C55E; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+              CONVERT<br>
+              <span style="font-size: 13px; font-weight: 500;">Enlist Buyers</span>
+            </button>
+          </div>
+        </div>
+        
+        <button type="button" class="btn-create-ad" id="createAdBtn" style="margin-top: 16px;">
+          Generate Ads with AI →
+        </button>
+      </div>
+
+      <!-- Generated Ads Results Container -->
+      <div id="adResults"></div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="https://www.philips.com" target="_blank">
+          <img src="philips-logo.svg" alt="Philips" style="filter: brightness(0) invert(1);">
+        </a>
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Our Story</a></li>
+            <li><a href="https://www.versuni.com/about-us/" target="_blank">Purpose</a></li>
+            <li><a href="https://www.versuni.com/suppliers/" target="_blank">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="https://www.versuni.com/products/airfryer/" target="_blank">Philips Airfryer</a></li>
+            <li><a href="https://www.versuni.com/products/latte-go/" target="_blank">Philips LatteGo</a></li>
+            <li><a href="https://www.versuni.com/products/air-purifier/" target="_blank">Air Purifier</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.versuni.com/privacy/" target="_blank">Privacy</a>
+        <a href="https://www.versuni.com/terms/" target="_blank">Terms</a>
+        <a href="https://www.versuni.com/security/" target="_blank">Security</a>
+      </div>
+      <a href="https://www.linkedin.com/company/philips-domestic-appliances" target="_blank" class="social-icon">
+        <img src="linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/ad-generator.js?v=3.0"></script>
+</body>
+</html>
