@@ -68,9 +68,9 @@ async function handleIdeaGeneration() {
   insightData.trend = trend;
   
   const btn = document.getElementById('discoverBtn');
-  const originalBtnText = btn.textContent;
+  const originalBtnHtml = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = '<span class="loading-spinner"></span> Generating creative idea...';
+  btn.innerHTML = '<span class="loading-spinner"></span><span>Generating creative idea...</span>';
   
   try {
     const ideaResult = await generateCreativeIdea(trend);
@@ -80,6 +80,8 @@ async function handleIdeaGeneration() {
     
     displayGeneratedIdea(ideaResult);
     
+    btn.innerHTML = '<span class="loading-spinner"></span><span>Expanding through funnel...</span>';
+    
     // Auto-expand through funnel
     await expandThroughFunnel(ideaResult);
     
@@ -88,7 +90,7 @@ async function handleIdeaGeneration() {
     alert('Error generating idea. Please try again.');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = originalBtnText;
+    btn.innerHTML = originalBtnHtml;
   }
 }
 

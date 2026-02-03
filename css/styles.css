@@ -909,12 +909,25 @@ body {
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
 }
 
-.btn-discover:hover {
+.btn-discover:hover:not(:disabled) {
   background: #004C97;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 94, 215, 0.3);
+}
+
+.btn-discover:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  background: #0B5ED7;
 }
 
 .previous-trends-section {
