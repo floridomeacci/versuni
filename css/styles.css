@@ -889,9 +889,21 @@ body {
   border-radius: 8px;
   font-size: 15px;
   font-family: inherit;
-  resize: none;
-  margin-bottom: 16px;
+  resize: vertical;
   transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Override for inputs and selects with auto height */
+.trend-textarea[style*="min-height: auto"] {
+  min-height: auto !important;
+  height: 48px;
+  resize: none;
+}
+
+/* Specific styling for textarea with custom height */
+.trend-textarea[style*="min-height: 80px"] {
+  min-height: 80px !important;
+  resize: vertical;
 }
 
 .trend-textarea:focus {
