@@ -44,41 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     productSelect.addEventListener('change', updateProductPreview);
   }
   
-  // Setup funnel stage selector
-  setupFunnelStageSelector();
+  // Setup funnel stage button handlers
+  setupFunnelStageHandlers();
   console.log('✓ Funnel stage selector (Desire/Engage/Convert) ready');
 });
 
-function setupFunnelStageSelector() {
-  // Add funnel stage selector to the form
-  const formCard = document.querySelector('.ad-maker-form');
-  if (!formCard) {
-    console.warn('⚠️ Could not find .ad-maker-form element');
-    return;
-  }
-  
-  const funnelSelector = document.createElement('div');
-  funnelSelector.style.cssText = 'margin-bottom: 24px;';
-  funnelSelector.innerHTML = `
-    <label class="form-label">Funnel Stage:</label>
-    <div style="display: flex; gap: 12px; margin-top: 12px;">
-      <button type="button" class="funnel-stage-btn active" data-stage="desire" style="flex: 1; padding: 12px 16px; border: 2px solid #0B5ED7; background: #0B5ED7; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-        DESIRE<br><span style="font-size: 12px; font-weight: 400; opacity: 0.9;">Declare Leadership</span>
-      </button>
-      <button type="button" class="funnel-stage-btn" data-stage="engage" style="flex: 1; padding: 12px 16px; border: 2px solid #0891B2; background: white; color: #0891B2; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-        ENGAGE<br><span style="font-size: 12px; font-weight: 400;">Activate Community</span>
-      </button>
-      <button type="button" class="funnel-stage-btn" data-stage="convert" style="flex: 1; padding: 12px 16px; border: 2px solid #22C55E; background: white; color: #22C55E; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-        CONVERT<br><span style="font-size: 12px; font-weight: 400;">Enlist Buyers</span>
-      </button>
-    </div>
-  `;
-  
-  const createBtn = document.getElementById('createAdBtn');
-  formCard.insertBefore(funnelSelector, createBtn);
-  console.log('✓ Funnel stage buttons injected into DOM');
-  
-  // Setup click handlers
+function setupFunnelStageHandlers() {
+  // Setup click handlers for funnel stage buttons (now in HTML)
   document.querySelectorAll('.funnel-stage-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.funnel-stage-btn').forEach(b => {
