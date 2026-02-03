@@ -6,9 +6,7 @@ const OPENAI_API_KEY = (
   ''
 ).trim();
 
-if (!OPENAI_API_KEY) {
-  console.warn('OpenAI API key not found. Set window.philipsConfig.openAiKey or localStorage philips_openai_api_key.');
-}
+// API key check removed - proxy endpoint handles authentication
 
 // Philips knowledge integration
 let knowledgePromise = null;
@@ -124,8 +122,35 @@ Return ONLY a JSON object:
 }
 
 function displayGeneratedIdea(result) {
-  // TODO: Update UI to show generated idea
-  console.log('Generated idea:', result);
+  // Hide the old trends section and show results
+  const trendsSection = document.querySelector('.previous-trends-section');
+  if (trendsSection) trendsSection.style.display = 'none';
+  
+  // Create or update results container
+  let resultsContainer = document.getElementById('insightResults');
+  if (!resultsContainer) {
+    resultsContainer = document.createElement('div');
+    resultsContainer.id = 'insightResults';
+    resultsContainer.style.cssText = 'max-width: 1000px; margin: 40px auto;';
+    document.querySelector('.page-container').appendChild(resultsContainer);
+  }
+  
+  resultsContainer.innerHTML = `
+    <div class="white-card" style="margin-bottom: 32px;">
+      <h2 style="font-size: 24px; font-weight: 700; color: #004C97; margin-bottom: 16px;">Generated Creative Idea</h2>
+      <div style="background: linear-gradient(135deg, #E8F4FD 0%, #F8FAFB 100%); padding: 24px; border-radius: 12px; border-left: 4px solid #0B5ED7; margin-bottom: 16px;">
+        <p style="font-size: 16px; color: #1A1A1A; line-height: 1.6; margin-bottom: 12px;">${result.idea}</p>
+        <div style="display: flex; gap: 16px; font-size: 14px; color: #6B7280; margin-top: 16px;">
+          <span><strong>Target Audience:</strong> ${result.targetAudience}</span>
+          <span><strong>Market:</strong> ${result.targetMarket}</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: #6B7280; font-style: italic;">${result.rationale}</p>
+    </div>
+    <div id="funnelResults"></div>
+  `;
+  
+  resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 async function expandThroughFunnel(ideaResult) {
@@ -250,18 +275,204 @@ Return ONLY a JSON object:
 }
 
 function displayAwarenessResult(result) {
-  // TODO: Update UI
-  console.log('Awareness:', result);
+  const funnelContainer = document.getElementById('funnelResults');
+  if (!funnelContainer) return;
+  
+  const scoreClass = result.awarenessScore >= 80 ? 'score-excellent' : result.awarenessScore >= 65 ? 'score-good' : result.awarenessScore >= 50 ? 'score-fair' : 'score-poor';
+  
+  funnelContainer.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #004C97; margin: 0;">Awareness Stage</h3>
+          <p style="font-size: 14px; color: #6B7280; margin: 4px 0 0 0;">How does this create emotional resonance?</p>
+        </div>
+        <div class="score-indicator">
+          <div class="score-bar">
+            <div class="score-marker" style="left: ${result.awarenessScore}%"></div>
+          </div>
+          <span class="score-label ${scoreClass}">${result.awarenessScore}</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Human Insight</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.humanInsight}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Reframed Idea</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.reframedIdea}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Content Approach</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.contentThought}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Philips Brand Role</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.brandRole}</p>
+      </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #92400E; margin-bottom: 8px;">Score Explanation</div>
+        <p style="font-size: 14px; color: #78350F; margin: 0;">${result.scoreExplanation}</p>
+      </div>
+      
+      ${result.redFlags && result.redFlags.length > 0 ? `
+        <div style="background: #FEF2F2; padding: 16px; border-radius: 8px; border-left: 4px solid #EF4444; margin-bottom: 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #991B1B; margin-bottom: 8px;">Red Flags</div>
+          <ul style="font-size: 14px; color: #991B1B; margin: 0; padding-left: 20px;">
+            ${result.redFlags.map(flag => `<li style="margin-bottom: 4px;">${flag}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      
+      ${result.optimizations && result.optimizations.length > 0 ? `
+        <div style="background: #F0FDF4; padding: 16px; border-radius: 8px; border-left: 4px solid #22C55E;">
+          <div style="font-size: 13px; font-weight: 600; color: #166534; margin-bottom: 8px;">Optimizations</div>
+          <ul style="font-size: 14px; color: #166534; margin: 0; padding-left: 20px;">
+            ${result.optimizations.map(opt => `<li style="margin-bottom: 4px;">${opt}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 function displayConsiderationResult(result) {
-  // TODO: Update UI
-  console.log('Consideration:', result);
+  const funnelContainer = document.getElementById('funnelResults');
+  if (!funnelContainer) return;
+  
+  const scoreClass = result.considerationScore >= 80 ? 'score-excellent' : result.considerationScore >= 65 ? 'score-good' : result.considerationScore >= 50 ? 'score-fair' : 'score-poor';
+  
+  funnelContainer.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #004C97; margin: 0;">Consideration Stage</h3>
+          <p style="font-size: 14px; color: #6B7280; margin: 4px 0 0 0;">Building credibility and trust</p>
+        </div>
+        <div class="score-indicator">
+          <div class="score-bar">
+            <div class="score-marker" style="left: ${result.considerationScore}%"></div>
+          </div>
+          <span class="score-label ${scoreClass}">${result.considerationScore}</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Proof Angle</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.proofAngle}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Social Proof Type</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.socialProofType}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Message Reframing</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.messageReframing}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Content Format</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.formatLogic}</p>
+      </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #92400E; margin-bottom: 8px;">Score Explanation</div>
+        <p style="font-size: 14px; color: #78350F; margin: 0;">${result.scoreExplanation}</p>
+      </div>
+      
+      ${result.redFlags && result.redFlags.length > 0 ? `
+        <div style="background: #FEF2F2; padding: 16px; border-radius: 8px; border-left: 4px solid #EF4444; margin-bottom: 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #991B1B; margin-bottom: 8px;">Red Flags</div>
+          <ul style="font-size: 14px; color: #991B1B; margin: 0; padding-left: 20px;">
+            ${result.redFlags.map(flag => `<li style="margin-bottom: 4px;">${flag}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      
+      ${result.optimizations && result.optimizations.length > 0 ? `
+        <div style="background: #F0FDF4; padding: 16px; border-radius: 8px; border-left: 4px solid #22C55E;">
+          <div style="font-size: 13px; font-weight: 600; color: #166534; margin-bottom: 8px;">Optimizations</div>
+          <ul style="font-size: 14px; color: #166534; margin: 0; padding-left: 20px;">
+            ${result.optimizations.map(opt => `<li style="margin-bottom: 4px;">${opt}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 function displayConversionResult(result) {
-  // TODO: Update UI
-  console.log('Conversion:', result);
+  const funnelContainer = document.getElementById('funnelResults');
+  if (!funnelContainer) return;
+  
+  const scoreClass = result.conversionScore >= 80 ? 'score-excellent' : result.conversionScore >= 65 ? 'score-good' : result.conversionScore >= 50 ? 'score-fair' : 'score-poor';
+  
+  funnelContainer.innerHTML += `
+    <div class="white-card" style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #004C97; margin: 0;">Conversion Stage</h3>
+          <p style="font-size: 14px; color: #6B7280; margin: 4px 0 0 0;">Removing barriers to purchase</p>
+        </div>
+        <div class="score-indicator">
+          <div class="score-bar">
+            <div class="score-marker" style="left: ${result.conversionScore}%"></div>
+          </div>
+          <span class="score-label ${scoreClass}">${result.conversionScore}</span>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Main Barrier</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.barrier}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Reassurance Message</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.reassuranceMessage}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Call-to-Action Logic</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.ctaLogic}</p>
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px;">Value Framing</div>
+        <p style="font-size: 14px; color: #1A1A1A; line-height: 1.6; margin: 0;">${result.offerFraming}</p>
+      </div>
+      
+      <div style="background: #FEF9E7; padding: 16px; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 600; color: #92400E; margin-bottom: 8px;">Score Explanation</div>
+        <p style="font-size: 14px; color: #78350F; margin: 0;">${result.scoreExplanation}</p>
+      </div>
+      
+      ${result.redFlags && result.redFlags.length > 0 ? `
+        <div style="background: #FEF2F2; padding: 16px; border-radius: 8px; border-left: 4px solid #EF4444; margin-bottom: 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #991B1B; margin-bottom: 8px;">Red Flags</div>
+          <ul style="font-size: 14px; color: #991B1B; margin: 0; padding-left: 20px;">
+            ${result.redFlags.map(flag => `<li style="margin-bottom: 4px;">${flag}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      
+      ${result.optimizations && result.optimizations.length > 0 ? `
+        <div style="background: #F0FDF4; padding: 16px; border-radius: 8px; border-left: 4px solid #22C55E;">
+          <div style="font-size: 13px; font-weight: 600; color: #166534; margin-bottom: 8px;">Optimizations</div>
+          <ul style="font-size: 14px; color: #166534; margin: 0; padding-left: 20px;">
+            ${result.optimizations.map(opt => `<li style="margin-bottom: 4px;">${opt}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 // Knowledge loading helpers (same as creative-reviewer)
