@@ -29,11 +29,13 @@ let adData = {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('✓ Ad Generator v2.0 initialized - Desire/Engage/Convert framework loaded');
   knowledgePromise = loadPhilipsKnowledge();
   
   const createBtn = document.getElementById('createAdBtn');
   if (createBtn) {
     createBtn.addEventListener('click', handleAdGeneration);
+    console.log('✓ Create button connected');
   }
   
   // Setup product selection
@@ -44,12 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Setup funnel stage selector
   setupFunnelStageSelector();
+  console.log('✓ Funnel stage selector (Desire/Engage/Convert) ready');
 });
 
 function setupFunnelStageSelector() {
   // Add funnel stage selector to the form
   const formCard = document.querySelector('.ad-maker-form');
-  if (!formCard) return;
+  if (!formCard) {
+    console.warn('⚠️ Could not find .ad-maker-form element');
+    return;
+  }
   
   const funnelSelector = document.createElement('div');
   funnelSelector.style.cssText = 'margin-bottom: 24px;';
@@ -70,6 +76,7 @@ function setupFunnelStageSelector() {
   
   const createBtn = document.getElementById('createAdBtn');
   formCard.insertBefore(funnelSelector, createBtn);
+  console.log('✓ Funnel stage buttons injected into DOM');
   
   // Setup click handlers
   document.querySelectorAll('.funnel-stage-btn').forEach(btn => {
@@ -89,6 +96,7 @@ function setupFunnelStageSelector() {
       this.style.color = 'white';
       
       adData.funnelStage = stage;
+      console.log(`✓ Funnel stage selected: ${stage.toUpperCase()}`);
     });
   });
 }
