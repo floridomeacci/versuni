@@ -142,8 +142,9 @@ async function handleAdGeneration() {
     displayGeneratedAds(ads);
     
   } catch (error) {
-    console.error('Error:', error);
-    alert('Error generating ads. Please try again.');
+    console.error('Full error details:', error);
+    const errorMsg = error.message || error.toString();
+    alert(`Error: ${errorMsg}`);
   } finally {
     btn.disabled = false;
     btn.innerHTML = originalBtnText;
@@ -253,10 +254,25 @@ Return ONLY a JSON object:
 
   const result = await callOpenAI(prompt, 'gpt-4o', true);
   
+  console.log('AI Response:', result);
+  
+  // Parse the response content if needed
+  let parsedResult = result;
+  if (typeof result === 'string') {
+    parsedResult = JSON.parse(result);
+  }
+  
   // Return the appropriate ads based on funnel stage
+  const stageKey = funnelStage + 'Ads';
+  const ads = parsedResult[stageKey] || parsedResult.desireAds || [];
+  
+  if (!ads || ads.length === 0) {
+    throw new Error(`No ads generated for ${funnelStage} stage. Response: ${JSON.stringify(parsedResult).substring(0, 200)}`);
+  }
+  
   return {
-    ads: result[funnelStage + 'Ads'] || result.desireAds,
-    overallStrategy: result.overallStrategy
+    ads: ads,
+    overallStrategy: parsedResult.overallStrategy || 'Strategic ad concepts aligned with the funnel stage.'
   };
 }
 
@@ -485,8 +501,18 @@ async function callOpenAI(prompt, model = 'gpt-4o', jsonMode = false) {
   const content = data.choices?.[0]?.message?.content || '';
   
   if (!content) {
+    console.error('OpenAI response data:', data);
     throw new Error('OpenAI response missing content');
   }
 
-  return jsonMode ? JSON.parse(content) : content;
+  if (jsonMode) {
+    try {
+      return JSON.parse(content);
+    } catch (e) {
+      console.error('Failed to parse JSON:', content);
+      throw new Error(`Invalid JSON from AI: ${e.message}`);
+    }
+  }
+  
+  return content;
 }
