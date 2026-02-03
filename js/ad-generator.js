@@ -119,6 +119,7 @@ async function handleAdGeneration() {
   const audience = document.getElementById('adAudienceSelect').value;
   const moment = document.getElementById('adMomentSelect').value;
   const product = document.getElementById('adProductSelect').value;
+  const context = document.getElementById('adContextInput').value.trim();
   
   if (!audience || !moment || !product) {
     alert('Please select audience, moment, and product');
@@ -128,6 +129,7 @@ async function handleAdGeneration() {
   adData.audience = audience;
   adData.moment = moment;
   adData.product = product;
+  adData.context = context;
   
   const btn = document.getElementById('createAdBtn');
   const originalBtnText = btn.innerHTML;
@@ -135,7 +137,7 @@ async function handleAdGeneration() {
   btn.innerHTML = '<span class="loading-spinner"></span> Generating ads...';
   
   try {
-    const ads = await generatePhilipsAds(audience, moment, product, adData.funnelStage);
+    const ads = await generatePhilipsAds(audience, moment, product, adData.funnelStage, context);
     adData.generatedAds = ads;
     displayGeneratedAds(ads);
     
@@ -148,10 +150,12 @@ async function handleAdGeneration() {
   }
 }
 
-async function generatePhilipsAds(audience, moment, product, funnelStage) {
+async function generatePhilipsAds(audience, moment, product, funnelStage, additionalContext = '') {
   const personaContext = philipsPersonas.length 
     ? philipsPersonas.map(p => `${p.name}: ${p.mindset}. Rituals: ${p.rituals}.`).join('\n')
     : DEFAULT_PERSONA_SUMMARIES;
+  
+  const contextSection = additionalContext ? `\n\nADDITIONAL CONTEXT:\n${additionalContext}` : '';
   
   const stageGuidance = {
     desire: {
@@ -190,7 +194,7 @@ ${funnelStage.toUpperCase()} STAGE GUIDANCE:
 Role: ${stage.role}
 Approach: ${stage.approach}
 Channels: ${stage.channels}
-Tone: ${stage.tone}
+Tone: ${stage.tone}${contextSection}
 
 ACTS OF HOMEMAKING FRAMEWORK:
 - Celebrate real homemaking moments (not just product features)
