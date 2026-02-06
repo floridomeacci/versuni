@@ -1,4 +1,5 @@
-const OPENAI_IMAGE_ENDPOINT = 'https://api.openai.com/v1/images/generations';
+// Vercel Serverless Function – Replicate Seedream 4 image generation proxy
+const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/models/bytedance/seedream-4/predictions';
 
 async function readRequestBody(req) {
   return await new Promise((resolve, reject) => {
@@ -19,9 +20,9 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    res.status(500).json({ error: 'Server misconfiguration: missing OPENAI_API_KEY' });
+  const apiToken = process.env.REPLICATE_API_TOKEN;
+  if (!apiToken) {
+    res.status(500).json({ error: 'Server misconfiguration: missing REPLICATE_API_TOKEN' });
     return;
   }
 
@@ -36,7 +37,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  const { prompt, size = '1024x1024', quality = 'standard', n = 1 } = body;
+  const { prompt, width = 1024, height = 1024, aspect_ratio = '1:1' } = body;
 
   if (!prompt) {
     res.status(400).json({ error: 'Missing prompt in request payload' });
@@ -44,34 +45,57 @@ module.exports = async function handler(req, res) {
   }
 
   const payload = {
-    model: 'dall-e-3',
-    prompt,
-    size,
-    quality,
-    n
+    input: {
+      prompt,
+      width,
+      height,
+      aspect_ratio,
+      max_images: 1,
+      enhance_prompt: true,
+      sequential_image_generation: 'disabled'
+    }
   };
 
   try {
-    const openaiResponse = await fetch(OPENAI_IMAGE_ENDPOINT, {
+    const replicateResponse = await fetch(REPLICATE_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiToken}`,
+        'Prefer': 'wait'
       },
       body: JSON.stringify(payload)
     });
 
-    const text = await openaiResponse.text();
-    res.status(openaiResponse.status);
-    res.setHeader('Content-Type', 'application/json');
+    const data = await replicateResponse.json();
 
-    try {
-      const json = JSON.parse(text);
-      res.json(json);
-    } catch (parseError) {
-      res.send(text);
+    if (!replicateResponse.ok) {
+      res.status(replicateResponse.status).json({
+        error: 'Replicate API error',
+        details: data
+      });
+      return;
     }
+
+    // Seedream returns output as an array of image URLs
+    const imageUrl = Array.isArray(data.output) ? data.output[0] : null;
+
+    if (!imageUrl) {
+      res.status(502).json({
+        error: 'No image returned from Seedream',
+        status: data.status,
+        details: data
+      });
+      return;
+    }
+
+    // Return in a consistent format
+    res.status(200).json({
+      url: imageUrl,
+      status: data.status,
+      id: data.id
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to contact OpenAI Images API', details: error.message });
+    res.status(500).json({ error: 'Failed to contact Replicate API', details: error.message });
   }
 };

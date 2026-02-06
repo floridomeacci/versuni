@@ -1,5 +1,5 @@
-// Ad Generator V3.0 - Philips "Made for the Homemakers" with AI Image Generation
-// Instagram-style previews with DALL-E generated creative
+// Ad Generator V3.1 - Philips "Made for the Homemakers" with AI Image Generation
+// Instagram-style previews with Seedream 4 (Replicate) generated creative
 
 let knowledgePromise = null;
 let philipsKnowledgeRaw = '';
@@ -112,7 +112,7 @@ document.head.appendChild(styleSheet);
 
 // ─── Initialize ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('✓ Ad Generator v3.0 - Instagram Preview + AI Image Generation');
+  console.log('✓ Ad Generator v3.1 - Instagram Preview + Seedream 4 Image Generation');
   knowledgePromise = loadPhilipsKnowledge();
 
   const createBtn = document.getElementById('createAdBtn');
@@ -292,7 +292,7 @@ Return ONLY valid JSON:
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// DALL-E 3: Generate ad image
+// Seedream 4 (Replicate): Generate ad image
 // ═══════════════════════════════════════════════════════════════════
 async function generateAdImage(ad, productInfo, funnelStage, index) {
   const imagePrompt = `Professional Instagram advertisement photo for Philips home appliances.
@@ -303,35 +303,24 @@ The ${productInfo.name} (${productInfo.visualDesc}) should be naturally visible 
 
 Style: High-end lifestyle photography, warm natural lighting, shallow depth of field, Instagram-worthy composition. Shot on Sony A7III with 35mm lens. Authentic and relatable, not stock-photo feeling. No text overlays, no logos, no watermarks, no words. Photorealistic.`;
 
-  const OPENAI_API_KEY = (
-    window?.philipsConfig?.openAiKey ||
-    localStorage.getItem('philips_openai_api_key') || ''
-  ).trim();
+  const response = await fetch('/api/openai-image', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      prompt: imagePrompt,
+      width: 1024,
+      height: 1024,
+      aspect_ratio: '1:1'
+    })
+  });
 
-  let data;
-
-  if (OPENAI_API_KEY) {
-    const response = await fetch('https://api.openai.com/v1/images/generations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${OPENAI_API_KEY}` },
-      body: JSON.stringify({ model: 'dall-e-3', prompt: imagePrompt, size: '1024x1024', quality: 'standard', n: 1 })
-    });
-    if (!response.ok) throw new Error(`Image API error: ${response.statusText}`);
-    data = await response.json();
-  } else {
-    const response = await fetch('/api/openai-image', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: imagePrompt, size: '1024x1024', quality: 'standard', n: 1 })
-    });
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Image proxy error: ${errText}`);
-    }
-    data = await response.json();
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Image generation error: ${errText}`);
   }
 
-  return data?.data?.[0]?.url || null;
+  const data = await response.json();
+  return data?.url || null;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -399,7 +388,7 @@ function renderInstagramPreview(ad, index, color, productInfo, loading) {
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #f0f4ff 0%, #e8f5f0 100%);">
           ${loading ? `
             <div style="width: 40px; height: 40px; border: 3px solid #E5E7EB; border-top-color: ${color}; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-            <p style="margin: 12px 0 0 0; font-size: 12px; color: #6B7280;">Generating image with AI...</p>
+            <p style="margin: 12px 0 0 0; font-size: 12px; color: #6B7280;">Generating image with Seedream...</p>
           ` : ''}
         </div>
         <!-- Headline overlay on image -->
