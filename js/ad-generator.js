@@ -303,6 +303,9 @@ The ${productInfo.name} (${productInfo.visualDesc}) should be naturally visible 
 
 Style: High-end lifestyle photography, warm natural lighting, shallow depth of field, Instagram-worthy composition. Shot on Sony A7III with 35mm lens. Authentic and relatable, not stock-photo feeling. No text overlays, no logos, no watermarks, no words. Photorealistic.`;
 
+  // Get full product image URL
+  const productImageUrl = new URL(productInfo.image, window.location.origin).href;
+
   const response = await fetch('/api/openai-image', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -310,7 +313,8 @@ Style: High-end lifestyle photography, warm natural lighting, shallow depth of f
       prompt: imagePrompt,
       width: 1024,
       height: 1024,
-      aspect_ratio: '1:1'
+      aspect_ratio: '1:1',
+      image_input: [productImageUrl]
     })
   });
 

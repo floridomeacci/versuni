@@ -37,7 +37,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  const { prompt, width = 1024, height = 1024, aspect_ratio = '1:1' } = body;
+  const { prompt, width = 1024, height = 1024, aspect_ratio = '1:1', image_input = [] } = body;
 
   if (!prompt) {
     res.status(400).json({ error: 'Missing prompt in request payload' });
@@ -51,6 +51,7 @@ module.exports = async function handler(req, res) {
       height,
       aspect_ratio,
       max_images: 1,
+      image_input,
       enhance_prompt: true,
       sequential_image_generation: 'disabled'
     }
