@@ -388,12 +388,12 @@ function renderInstagramPreview(ad, index, color, productInfo, loading) {
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #f0f4ff 0%, #e8f5f0 100%);">
           ${loading ? `
             <div style="width: 40px; height: 40px; border: 3px solid #E5E7EB; border-top-color: ${color}; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-            <p style="margin: 12px 0 0 0; font-size: 12px; color: #6B7280;">Generating image with Seedream...</p>
+            <p style="margin: 12px 0 0 0; font-size: 12px; color: #6B7280;">Generating</p>
           ` : ''}
         </div>
         <!-- Headline overlay on image -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 16px 16px; background: linear-gradient(transparent, rgba(0,0,0,0.65));">
-          <p style="color: white; font-size: 16px; font-weight: 700; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.5); line-height: 1.3;">${ad.headline}</p>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: #004C97;">
+          <p style="color: white; font-size: 15px; font-weight: 700; margin: 0; line-height: 1.3;">${ad.headline}</p>
         </div>
       </div>
 
