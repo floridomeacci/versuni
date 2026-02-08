@@ -1,0 +1,15 @@
+{
+  "name": "versuni",
+  "version": "1.0.0",
+  "description": "Versuni project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "optimize-images": "node scripts/optimize-images.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  },
+  "author": "Florido Meacci",
+  "license": "ISC"
+}
