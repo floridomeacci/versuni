@@ -54,11 +54,11 @@ const PRODUCTS = {
     visualDesc: 'a black Philips LatteGo 3200 coffee machine'
   },
   'air-steam-cooker': {
-    name: 'Philips Air Steam Cooker',
+    name: 'Philips Airfryer with Steam',
     price: '$349.99',
-    desc: 'Combines time, temperature and humidity for optimal cooking results every time.',
+    desc: 'Combines airfrying and steam for crispy outside, juicy inside — perfect results every time.',
     image: 'images/imgi_30_Aircooker_88aaad917c_af05dc9f85_1600_75.webp',
-    visualDesc: 'a modern black Philips Air Steam Cooker with a glass lid and digital display'
+    visualDesc: 'a modern black Philips Airfryer with Steam, featuring a glass lid and digital controls'
   },
   'air-purifier': {
     name: 'Philips Air Purifier',
@@ -137,14 +137,14 @@ function setupFunnelStageHandlers() {
       document.querySelectorAll('.funnel-stage-btn').forEach(b => {
         b.classList.remove('active');
         const stage = b.dataset.stage;
-        const color = stage === 'desire' ? '#0B5ED7' : stage === 'engage' ? '#0891B2' : '#22C55E';
+        const color = stage === 'desire' ? '#0B5ED7' : stage === 'explore' ? '#0891B2' : '#22C55E';
         b.style.background = 'white';
         b.style.color = color;
         b.style.boxShadow = 'none';
       });
       this.classList.add('active');
       const stage = this.dataset.stage;
-      const color = stage === 'desire' ? '#0B5ED7' : stage === 'engage' ? '#0891B2' : '#22C55E';
+      const color = stage === 'desire' ? '#0B5ED7' : stage === 'explore' ? '#0891B2' : '#22C55E';
       this.style.background = color;
       this.style.color = 'white';
       this.style.boxShadow = `0 4px 12px ${color}44`;
@@ -250,7 +250,7 @@ async function generateAdConcepts(audience, moment, product, funnelStage, additi
 
   const stageGuidance = {
     desire: { role: 'Declare Leadership', approach: 'Premium, emotive, aspirational', channels: 'AV, YouTube, Social', tone: 'Proudly humble, celebrates real homemaking' },
-    engage: { role: 'Activate Community', approach: 'Participatory, authentic, real-life', channels: 'Social, Creators, Partnerships', tone: 'Light-hearted, welcoming, genuine' },
+    explore: { role: 'Activate Community', approach: 'Participatory, authentic, real-life', channels: 'Social, Creators, Partnerships', tone: 'Light-hearted, welcoming, genuine' },
     convert: { role: 'Enlist Buyers', approach: 'Direct, benefit-focused', channels: 'Meta, Google, Amazon', tone: 'Helpful, reassuring, practical' }
   };
 
@@ -340,8 +340,8 @@ Style: High-end lifestyle photography, warm natural lighting, shallow depth of f
 function displayAdPreviews(result, loading = false) {
   const resultsContainer = document.getElementById('adResults');
 
-  const stageColors = { desire: '#0B5ED7', engage: '#0891B2', convert: '#22C55E' };
-  const stageLabels = { desire: 'Desire · Declare Leadership', engage: 'Engage · Activate Community', convert: 'Convert · Enlist Buyers' };
+  const stageColors = { desire: '#0B5ED7', explore: '#0891B2', convert: '#22C55E' };
+  const stageLabels = { desire: 'Desire · Declare Leadership', explore: 'Explore · Activate Community', convert: 'Convert · Enlist Buyers' };
   const stageColor = stageColors[adData.funnelStage];
   const productInfo = PRODUCTS[adData.product] || PRODUCTS['airfryer-xxl'];
 
@@ -404,7 +404,7 @@ function renderInstagramPreview(ad, index, color, productInfo, loading) {
         </div>
         <!-- Headline overlay on image -->
         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: #004C97;">
-          <p style="color: white; font-size: 15px; font-weight: 700; margin: 0; line-height: 1.3;">${ad.headline}</p>
+          <p style="color: white; font-size: 15px; font-weight: 700; margin: 0; line-height: 1.3;">Love ${ad.headline.toLowerCase()}</p>
         </div>
       </div>
 
@@ -511,7 +511,7 @@ async function callOpenAI(prompt, model = 'gpt-4o', jsonMode = false) {
   }
 
   const messages = [
-    { role: 'system', content: 'You are a world-class creative director for Philips home appliances. You create Instagram-native ad content aligned with the "Made for the Homemakers" platform and Desire/Engage/Convert funnel. Always return only valid JSON when asked.' },
+    { role: 'system', content: 'You are a world-class creative director for Philips home appliances. You create Instagram-native ad content aligned with the "Made for the Homemakers" platform and Desire/Explore/Convert funnel. Always return only valid JSON when asked.' },
     { role: 'user', content: prompt }
   ];
 
