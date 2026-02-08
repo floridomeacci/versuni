@@ -18,6 +18,13 @@ const DEFAULT_PERSONA_SUMMARIES = [
 
 // Product data with images and visual descriptions for DALL-E
 const PRODUCTS = {
+  'airfryer-rapidairplus': {
+    name: 'Philips Airfryer with Rapid Air Plus',
+    price: '$249.99',
+    desc: 'Advanced Rapid Air Plus technology for perfectly crispy results with 90% less fat.',
+    image: 'images/airfryer-RapidAirPlus.png',
+    visualDesc: 'a modern black Philips Airfryer with Rapid Air Plus technology and digital controls'
+  },
   'airfryer-xxl': {
     name: 'Philips Airfryer XXL',
     price: '$299.99',
