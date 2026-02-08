@@ -217,7 +217,7 @@ function displayHomemakingActs(result) {
     resultsContainer = document.createElement('div');
     resultsContainer.id = 'insightResults';
     resultsContainer.style.cssText = 'max-width: 1000px; margin: 40px auto;';
-    document.querySelector('.funnel-main-content').appendChild(resultsContainer);
+    document.querySelector('.page-container').appendChild(resultsContainer);
   }
   
   resultsContainer.innerHTML = `
