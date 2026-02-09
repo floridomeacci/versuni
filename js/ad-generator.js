@@ -18,12 +18,12 @@ const DEFAULT_PERSONA_SUMMARIES = [
 
 // Product data with images and visual descriptions for DALL-E
 const PRODUCTS = {
-  'airfryer-rapidairplus': {
-    name: 'Philips Airfryer with Rapid Air Plus',
+  'airfryer-steam': {
+    name: 'Philips Airfryer with Steam',
     price: '$249.99',
-    desc: 'Advanced Rapid Air Plus technology for perfectly crispy results with 90% less fat.',
+    desc: 'Combines airfrying and steam for crispy outside, juicy inside — perfect results every time.',
     image: 'images/airfryer-RapidAirPlus.png',
-    visualDesc: 'a modern black Philips Airfryer with Rapid Air Plus technology and digital controls'
+    visualDesc: 'a modern black Philips Airfryer with Steam technology and digital controls'
   },
   'airfryer-xxl': {
     name: 'Philips Airfryer XXL',
@@ -53,13 +53,7 @@ const PRODUCTS = {
     image: 'images/imgi_93_Philips_5400_Latte_Go_1_68dab93d0d_ce5ad74505.png',
     visualDesc: 'a black Philips LatteGo 3200 coffee machine'
   },
-  'air-steam-cooker': {
-    name: 'Philips Airfryer with Steam',
-    price: '$349.99',
-    desc: 'Combines airfrying and steam for crispy outside, juicy inside — perfect results every time.',
-    image: 'images/imgi_30_Aircooker_88aaad917c_af05dc9f85_1600_75.webp',
-    visualDesc: 'a modern black Philips Airfryer with Steam, featuring a glass lid and digital controls'
-  },
+
   'air-purifier': {
     name: 'Philips Air Purifier',
     price: '$449.99',
