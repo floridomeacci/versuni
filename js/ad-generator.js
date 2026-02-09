@@ -275,6 +275,7 @@ ${personaContext}
 REQUIREMENTS:
 - Each ad must have a punchy headline (max 8 words), a body caption, a visual scene description for image generation, and a CTA
 ${funnelStage === 'desire' ? `- HEADLINE FORMAT: Each headline MUST start with "Love" followed by a relatable human moment. Example: "Love every culinary moment", "Love cozy Sunday mornings", "Love the first sip". Do NOT put the concept/idea in the headline — focus on the MOMENT the audience experiences. Keep it to 5-7 words total including "Love".` : `- Headlines should be punchy and benefit-focused. Do NOT start headlines with "Love" — that is only for Desire stage.`}
+- CAPTION FORMAT: The caption MUST end with "Made for the Homemaker." Include a key product feature of the ${productInfo.name} in the caption. Do NOT include any hashtags.
 - The visual scene must describe a real lifestyle photo scene (no text overlays) featuring the product in a real home setting
 - Think Instagram-native: warm, authentic, aspirational but relatable
 - Celebrate Acts of Homemaking — real people, real moments, real homes
@@ -284,7 +285,7 @@ Return ONLY valid JSON:
   "ads": [
     {
       "headline": "Short punchy headline (max 8 words)",
-      "caption": "Instagram caption text (2-3 sentences with relevant hashtags)",
+      "caption": "Instagram caption text (2-3 sentences highlighting a product feature, ending with 'Made for the Homemaker.' No hashtags)",
       "visualScene": "Detailed photo description for AI image generation. Describe the setting, lighting, people, mood, and where the ${productInfo.name} appears. Must be a lifestyle photo, warm and authentic. 2-3 sentences.",
       "cta": "Call to action button text",
       "format": "Feed Post / Reels / Carousel",
