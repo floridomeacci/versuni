@@ -320,8 +320,6 @@ Style: High-end lifestyle photography, warm natural lighting, shallow depth of f
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       prompt: imagePrompt,
-      width: 1024,
-      height: 1024,
       aspect_ratio: '1:1',
       image_input: [productImageUrl]
     })

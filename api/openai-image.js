@@ -1,5 +1,5 @@
-// Vercel Serverless Function – Replicate Seedream 4 image generation proxy
-const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/models/bytedance/seedream-4/predictions';
+// Vercel Serverless Function – Replicate Nano Banana Pro image generation proxy
+const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/models/google/nano-banana-pro/predictions';
 
 async function readRequestBody(req) {
   return await new Promise((resolve, reject) => {
@@ -47,13 +47,11 @@ module.exports = async function handler(req, res) {
   const payload = {
     input: {
       prompt,
-      width,
-      height,
+      resolution: '1K',
       aspect_ratio,
-      max_images: 1,
-      image_input,
-      enhance_prompt: true,
-      sequential_image_generation: 'disabled'
+      output_format: 'png',
+      safety_filter_level: 'block_only_high',
+      image_input
     }
   };
 
@@ -78,12 +76,12 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    // Seedream returns output as an array of image URLs
+    // Nano Banana Pro returns output as an array of image URLs
     const imageUrl = Array.isArray(data.output) ? data.output[0] : null;
 
     if (!imageUrl) {
       res.status(502).json({
-        error: 'No image returned from Seedream',
+        error: 'No image returned from Nano Banana Pro',
         status: data.status,
         details: data
       });
