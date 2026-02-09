@@ -1,5 +1,6 @@
-// Vercel Serverless Function – Replicate Nano Banana Pro image generation proxy
-const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/models/google/nano-banana-pro/predictions';
+// Vercel Serverless Function – Replicate Flux 2 Fast image generation proxy
+const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/predictions';
+const FLUX_VERSION = '7fbd6197df31149fd65a673011a4d9f70f67e0a96149ab522b2040b0b31cd154';
 
 async function readRequestBody(req) {
   return await new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  const { prompt, width = 1024, height = 1024, aspect_ratio = '1:1', image_input = [] } = body;
+  const { prompt, image_input = [] } = body;
 
   if (!prompt) {
     res.status(400).json({ error: 'Missing prompt in request payload' });
@@ -45,13 +46,16 @@ module.exports = async function handler(req, res) {
   }
 
   const payload = {
+    version: FLUX_VERSION,
     input: {
       prompt,
-      resolution: '1K',
-      aspect_ratio,
-      output_format: 'png',
-      safety_filter_level: 'block_only_high',
-      image_input
+      width: 1024,
+      height: 1024,
+      num_outputs: 1,
+      aspect_ratio: '1:1',
+      input_images: image_input,
+      output_format: 'jpg',
+      output_quality: 80
     }
   };
 
@@ -76,12 +80,12 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    // Nano Banana Pro returns output as an array of image URLs
+    // Flux returns output as an array of image URLs
     const imageUrl = Array.isArray(data.output) ? data.output[0] : null;
 
     if (!imageUrl) {
       res.status(502).json({
-        error: 'No image returned from Nano Banana Pro',
+        error: 'No image returned from Flux',
         status: data.status,
         details: data
       });
