@@ -37,7 +37,7 @@ const PRODUCTS = {
     price: '$179.99',
     desc: 'Compact design with powerful performance for smaller households.',
     image: 'images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp',
-    visualDesc: 'a compact white Philips Airfryer kitchen appliance'
+    visualDesc: 'a compact Philips Airfryer kitchen appliance with a sleek design'
   },
   'lattego-5400': {
     name: 'Philips LatteGo 5400',
@@ -64,38 +64,44 @@ const PRODUCTS = {
     name: 'Philips Air Purifier',
     price: '$449.99',
     desc: 'HEPA filtration removes 99.97% of particles for cleaner, healthier air at home.',
-    image: 'images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp',
+    image: 'images/imgi_23_Air_purifier_65cd2f78a4_31a7e09764_1280_75.webp',
     visualDesc: 'a white cylindrical Philips Air Purifier with a subtle blue light indicator'
   },
   'aquatrio-cordless': {
     name: 'Philips AquaTrio Cordless',
     price: '$399.99',
     desc: 'Vacuums, mops and dries in one pass for effortless floor cleaning.',
-    image: 'images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp',
+    image: 'images/imgi_38_Aqua_trio_cordless_7c0db06f22_cfe167269c_2560_75.webp',
     visualDesc: 'a cordless Philips AquaTrio wet and dry vacuum cleaner'
   },
   'handheld-steamer': {
     name: 'Philips Handheld Steamer',
     price: '$79.99',
     desc: 'Quick and easy garment steaming with continuous steam output.',
-    image: 'images/imgi_13_Airfryer_XL_1574f74b04_a03d8c5cb0_1920_75.webp',
+    image: 'images/imgi_41_Hand_held_steamer_2768310a70_2bef934b52_1280_75.webp',
     visualDesc: 'a compact blue Philips handheld garment steamer'
   },
   'saeco-xelsis': {
     name: 'Saeco Xelsis Suprema',
     price: '$1,799.99',
     desc: 'Premium fully automatic espresso machine with CoffeeEqualizer touch display.',
-    image: 'images/imgi_93_Philips_5400_Latte_Go_1_68dab93d0d_ce5ad74505.png',
+    image: 'images/imgi_49_Saeco_Xelsis_a649a1c144_1920_75.webp',
     visualDesc: 'a premium stainless steel Saeco Xelsis Suprema espresso machine with touchscreen'
   },
   'gaggia-classic': {
     name: 'Gaggia Classic Evo',
     price: '$499.99',
     desc: 'Iconic Italian design meets modern brewing technology for espresso purists.',
-    image: 'images/imgi_93_Philips_5400_Latte_Go_1_68dab93d0d_ce5ad74505.png',
+    image: 'images/imgi_56_Gaggia_Classic_Evo_492ee6acb8_2560_75.webp',
     visualDesc: 'a classic stainless steel Gaggia Classic Evo espresso machine with portafilter'
   }
 };
+
+// Sentence case helper: "LOVE EVERY culinary Moment" → "Love every culinary moment"
+function toSentenceCase(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 // Global state
 let adData = {
@@ -274,6 +280,7 @@ ${personaContext}
 
 REQUIREMENTS:
 - Each ad must have a punchy headline (max 8 words), a body caption, a visual scene description for image generation, and a CTA
+${funnelStage === 'desire' ? `- HEADLINE FORMAT: Each headline MUST start with "Love" followed by a relatable human moment. Example: "Love every culinary moment", "Love cozy Sunday mornings", "Love the first sip". Do NOT put the concept/idea in the headline — focus on the MOMENT the audience experiences. Keep it to 5-7 words total including "Love".` : `- Headlines should be punchy and benefit-focused. Do NOT start headlines with "Love" — that is only for Desire stage.`}
 - The visual scene must describe a real lifestyle photo scene (no text overlays) featuring the product in a real home setting
 - Think Instagram-native: warm, authentic, aspirational but relatable
 - Celebrate Acts of Homemaking — real people, real moments, real homes
@@ -404,7 +411,7 @@ function renderInstagramPreview(ad, index, color, productInfo, loading) {
         </div>
         <!-- Headline overlay on image -->
         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: #004C97;">
-          <p style="color: white; font-size: 15px; font-weight: 700; margin: 0; line-height: 1.3;">Love ${ad.headline.toLowerCase()}</p>
+          <p style="color: white; font-size: 15px; font-weight: 700; margin: 0; line-height: 1.3;">${toSentenceCase(ad.headline)}</p>
         </div>
       </div>
 
