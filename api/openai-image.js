@@ -1,6 +1,5 @@
-// Vercel Serverless Function – Replicate Flux 2 Fast image generation proxy
-const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/predictions';
-const FLUX_VERSION = '7fbd6197df31149fd65a673011a4d9f70f67e0a96149ab522b2040b0b31cd154';
+// Vercel Serverless Function – Replicate FLUX.2 Pro image generation proxy
+const REPLICATE_ENDPOINT = 'https://api.replicate.com/v1/models/black-forest-labs/flux-2-pro/predictions';
 
 async function readRequestBody(req) {
   return await new Promise((resolve, reject) => {
@@ -46,16 +45,14 @@ module.exports = async function handler(req, res) {
   }
 
   const payload = {
-    version: FLUX_VERSION,
     input: {
       prompt,
-      width: 1024,
-      height: 1024,
-      num_outputs: 1,
+      resolution: '1 MP',
       aspect_ratio: '1:1',
       input_images: image_input,
-      output_format: 'jpg',
-      output_quality: 80
+      output_format: 'webp',
+      output_quality: 80,
+      safety_tolerance: 2
     }
   };
 
@@ -80,12 +77,12 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    // Flux returns output as an array of image URLs
+    // FLUX.2 Pro returns output as an array of image URLs
     const imageUrl = Array.isArray(data.output) ? data.output[0] : null;
 
     if (!imageUrl) {
       res.status(502).json({
-        error: 'No image returned from Flux',
+        error: 'No image returned from FLUX.2 Pro',
         status: data.status,
         details: data
       });
