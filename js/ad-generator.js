@@ -23,7 +23,7 @@ const PRODUCTS = {
     price: '$249.99',
     desc: 'Combines airfrying and steam for crispy outside, juicy inside — perfect results every time.',
     image: 'images/airfryer-RapidAirPlus.png',
-    visualDesc: 'a modern black Philips Airfryer with Steam technology and digital controls'
+    visualDesc: 'a premium Philips Airfryer with Steam — a wide rectangular stainless steel body with a brushed silver metallic finish. It has a dark black/smoked transparent lid on top, two sturdy flat silver side handles, and a "RapidAir Plus Technology" badge on the lower front. The design is industrial and modern with clean lines. The appliance is compact but wide, resembling a high-end countertop oven rather than a traditional round airfryer.'
   },
   'airfryer-xxl': {
     name: 'Philips Airfryer XXL',
