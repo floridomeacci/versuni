@@ -77,8 +77,8 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    // FLUX.2 Pro returns output as an array of image URLs
-    const imageUrl = Array.isArray(data.output) ? data.output[0] : null;
+    // FLUX.2 Pro returns output as a string URL or an array
+    const imageUrl = typeof data.output === 'string' ? data.output : (Array.isArray(data.output) ? data.output[0] : null);
 
     if (!imageUrl) {
       res.status(502).json({
